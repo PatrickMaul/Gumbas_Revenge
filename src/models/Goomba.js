@@ -39,9 +39,15 @@ class Goomba {
     if (phaser.cursors.left.isDown) {
       phaser.player.setVelocityX(-160);
       phaser.player.anims.play('left', true);
+      phaser.mountainsBack.tilePositionX -= 0.05;
+      phaser.mountainsMid1.tilePositionX -= 0.75;
+      phaser.mountainsMid2.tilePositionX -= 0.3;
     } else if (phaser.cursors.right.isDown) {
       phaser.player.setVelocityX(160);
       phaser.player.anims.play('right', true);
+      phaser.mountainsBack.tilePositionX += 0.05;
+      phaser.mountainsMid1.tilePositionX += 0.75;
+      phaser.mountainsMid2.tilePositionX += 0.3;
     } else {
       phaser.player.setVelocityX(0);
       phaser.player.anims.play('turn');
