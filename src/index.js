@@ -1,9 +1,5 @@
 import 'phaser';
-import Boot from './scenes/Boot';
-import Preload from './scenes/Preload';
-import GameTitle from './scenes/GameTitle';
-import Main from './scenes/Main';
-import GameOver from './scenes/GameOver';
+import BaseLevel from './scenes/BaseLevel';
 
 class Game extends Phaser.Game {
   constructor() {
@@ -22,13 +18,9 @@ class Game extends Phaser.Game {
 
     super(config);
 
-    this.scene.add('Boot', Boot, false);
-    this.scene.add('Preload', Preload, false);
-    this.scene.add('GameTitle', GameTitle, false);
-    this.scene.add('Main', Main, false);
-    this.scene.add('GameOver', GameOver, false);
+    this.scene.add('BaseLevel', BaseLevel, false);
 
-    this.scene.start('Boot');
+    this.scene.start('BaseLevel');
   }
 }
 
