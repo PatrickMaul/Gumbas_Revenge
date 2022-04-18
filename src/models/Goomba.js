@@ -53,8 +53,8 @@ class Goomba {
       phaser.player.anims.play('turn');
     }
     // Jump
-    if (phaser.cursors.up.isDown || phaser.cursors.space.isDown) {
-      phaser.player.setVelocityY(-300);
+    if ((phaser.cursors.up.isDown || phaser.cursors.space.isDown) && phaser.player.body.touching.down) {
+      phaser.player.setVelocityY(-400);
     }
   }
 }

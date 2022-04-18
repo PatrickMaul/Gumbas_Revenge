@@ -13,7 +13,9 @@ class Platform {
   }
 
   addGras(phaser) {
-    phaser.platforms.create(this.width / 2, window.innerHeight - this.height / 2, this.gras).setScale(this.scale);
+    phaser.platforms
+      .create((this.width / 2) * 4, window.innerHeight - this.height * 1.5, this.gras)
+      .setScale(this.scale);
   }
 
   addGrasRow(phaser, border) {
