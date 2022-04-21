@@ -1,5 +1,6 @@
 import 'phaser';
-import BaseLevel from './scenes/BaseLevel';
+import Preload from './scenes/Preload';
+import Menu from './scenes/menu';
 
 class Game extends Phaser.Game {
   constructor() {
@@ -18,9 +19,10 @@ class Game extends Phaser.Game {
 
     super(config);
 
-    this.scene.add('BaseLevel', BaseLevel, false);
+    this.scene.add('Preload', Preload, false);
+    this.scene.add('Menu', Menu, false);
 
-    this.scene.start('BaseLevel');
+    this.scene.start('Preload');
   }
 }
 
