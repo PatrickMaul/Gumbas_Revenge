@@ -1,6 +1,7 @@
 import 'phaser';
 import Preload from './scenes/Preload';
 import Menu from './scenes/menu';
+import TestLevel from './scenes/levels/test';
 
 class Game extends Phaser.Game {
   constructor() {
@@ -21,6 +22,7 @@ class Game extends Phaser.Game {
 
     this.scene.add('Preload', Preload, false);
     this.scene.add('Menu', Menu, false);
+    this.scene.add('TestLevel', TestLevel, false);
 
     this.scene.start('Preload');
   }
