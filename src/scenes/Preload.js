@@ -19,6 +19,7 @@ class Preload extends Phaser.Scene {
     this.initProgressBar()
 
     // LOAD STUFF
+    this.load.spritesheet('goomba', './src/assets/goomba.png', { frameWidth: 32, frameHeight: 32 });
   }
 
   initProgressBar() {
