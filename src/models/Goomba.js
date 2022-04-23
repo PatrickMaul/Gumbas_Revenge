@@ -77,15 +77,16 @@ class Goomba {
       scene.player.setVelocityY(-400);
     }
   }
+
   moveBackround(scene, option) {
     if (option === 0) {
-      scene.mountainsBack.tilePositionX -= 0.05;
-      scene.mountainsMid1.tilePositionX -= 0.3;
-      scene.mountainsMid2.tilePositionX -= 0.75;
+      scene.woodFar.tilePositionX -= 0.05;
+      scene.woodMid.tilePositionX -= 0.1;
+      scene.woodClose.tilePositionX -= 0.4;
     } else if (option === 1) {
-      scene.mountainsBack.tilePositionX += 0.05;
-      scene.mountainsMid1.tilePositionX += 0.3;
-      scene.mountainsMid2.tilePositionX += 0.75;
+      scene.woodFar.tilePositionX += 0.05;
+      scene.woodMid.tilePositionX += 0.1;
+      scene.woodClose.tilePositionX += 0.4;
     } else return;
   }
 }
