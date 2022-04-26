@@ -5,12 +5,10 @@ class Goomba {
   SPAWN_X = null;
   SPAWN_Y = null;
   SPRITE_KEY = "goomba";
-  SPRITE_PATH = "./src/assets/goomba.png";
   BOUNCE = 0.2;
   COLLIDE_WITH_WORLD = true;
   // Other
   SCALE = 1.5;
-  SPRITE = null;
 
   constructor(scene, config = {}) {
     // Set config
@@ -20,12 +18,10 @@ class Goomba {
     this.SPAWN_X = this.FRAME_WIDTH / 2 + config.SPAWN_X || this.FRAME_WIDTH / 2;
     this.SPAWN_Y = scene.cameras.main.height - config.SPAWN_Y || scene.cameras.main.height;
     this.SPRITE_KEY = config.SPRITE_KEY || this.SPRITE_KEY;
-    this.SPRITE_PATH = config.SPRITE_PATH || this.SPRITE_PATH;
     this.BOUNCE = config.BOUNCE || this.BOUNCE;
     this.COLLIDE_WITH_WORLD = config.COLLIDE_WITH_WORLD || this.COLLIDE_WITH_WORLD;
     // // Other
     this.SCALE = config.SCALE || this.SCALE;
-    this.SPRITE = config.SPRITE || this.SPRITE;
 
     // Create Goomba
     this.create(scene);
