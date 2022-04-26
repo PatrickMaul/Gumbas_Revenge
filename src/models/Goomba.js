@@ -83,10 +83,18 @@ class Goomba {
       scene.woodFar.tilePositionX -= 0.05;
       scene.woodMid.tilePositionX -= 0.1;
       scene.woodClose.tilePositionX -= 0.4;
+
+      // scene.platforms.children.entries.forEach((element) => {
+      //   element.x += 0.5;
+      // });
     } else if (option === 1) {
       scene.woodFar.tilePositionX += 0.05;
       scene.woodMid.tilePositionX += 0.1;
       scene.woodClose.tilePositionX += 0.4;
+
+      // scene.platforms.children.entries.forEach((element) => {
+      //   element.x -= 0.5;
+      // });
     } else return;
   }
 }
