@@ -18,7 +18,7 @@ class Goomba {
     this.FRAME_WIDTH = config.FRAME_WIDTH || this.FRAME_WIDTH;
     this.FRAME_HEIGHT = config.FRAME_HEIGHT || this.FRAME_HEIGHT;
     this.SPAWN_X = this.FRAME_WIDTH / 2 + config.SPAWN_X || this.FRAME_WIDTH / 2;
-    this.SPAWN_Y = window.innerHeight - config.SPAWN_Y || window.innerHeight;
+    this.SPAWN_Y = scene.cameras.main.height - config.SPAWN_Y || scene.cameras.main.height;
     this.SPRITE_KEY = config.SPRITE_KEY || this.SPRITE_KEY;
     this.SPRITE_PATH = config.SPRITE_PATH || this.SPRITE_PATH;
     this.BOUNCE = config.BOUNCE || this.BOUNCE;

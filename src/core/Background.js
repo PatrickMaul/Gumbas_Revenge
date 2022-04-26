@@ -1,7 +1,36 @@
 class Background {
-  constructor(scene, paths) {
-    this.PATHS = [...paths];
+  PATHS = [
+    {
+      key: "woodBg",
+      tileKey: "wood-bg",
+      path: "./src/assets/backgrounds/deamon_woods/wood-bg.png",
+      width: 706,
+      height: 500,
+    },
+    {
+      key: "woodFar",
+      tileKey: "wood-far",
+      path: "./src/assets/backgrounds/deamon_woods/wood-far.png",
+      width: 871,
+      height: 500,
+    },
+    {
+      key: "woodMid",
+      tileKey: "wood-mid",
+      path: "./src/assets/backgrounds/deamon_woods/wood-mid.png",
+      width: 871,
+      height: 500,
+    },
+    {
+      key: "woodClose",
+      tileKey: "wood-close",
+      path: "./src/assets/backgrounds/deamon_woods/wood-close.png",
+      width: 871,
+      height: 500,
+    },
+  ];
 
+  constructor(scene) {
     this.PATHS.forEach((path) => {
       scene.load.image(path.tileKey, path.path);
     });
@@ -11,13 +40,13 @@ class Background {
     this.PATHS.forEach((path) => {
       scene[path.key] = scene.add.tileSprite(
         scene.cameras.main.width / 2,
-        scene.cameras.main.height - path.height - 128,
+        250,
         scene.cameras.main.width,
         path.height,
         path.tileKey
       );
 
-      scene[path.key].setScale(2.5);
+      scene[path.key].setScale(1);
     });
   }
 }
