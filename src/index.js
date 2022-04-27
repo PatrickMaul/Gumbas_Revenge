@@ -9,7 +9,7 @@ class Game extends Phaser.Game {
       type: Phaser.AUTO,
       backgroundColor: "#162c38",
       width: 800,
-      height: 500,
+      height: 448,
       physics: {
         default: "arcade",
         arcade: {
