@@ -69,7 +69,7 @@ class Goomba {
       scene.player.anims.play("turn");
     }
     // Jump
-    if ((scene.cursors.up.isDown || scene.cursors.space.isDown) && scene.player.body.touching.down) {
+    if ((scene.cursors.up.isDown || scene.cursors.space.isDown) && scene.player.body.onFloor()) {
       scene.player.setVelocityY(-400);
     }
   }
