@@ -2,7 +2,9 @@ import "phaser";
 import Preload from "./scenes/Preload";
 import Menu from "./scenes/menu";
 import TestLevel from "./scenes/levels/test";
+import Timer from "./core/Timer";
 
+window.timer = new Timer()
 class Game extends Phaser.Game {
   constructor() {
     const config = {
