@@ -4,13 +4,11 @@ class Goomba {
   FRAME_HEIGHT = 32;
   SPAWN_X = null;
   SPAWN_Y = null;
-  SPRITE_KEY = 'goomba';
-  SPRITE_PATH = './src/assets/goomba.png';
+  SPRITE_KEY = "goomba";
   BOUNCE = 0.2;
   COLLIDE_WITH_WORLD = true;
   // Other
   SCALE = 1.5;
-  SPRITE = null;
 
   constructor(scene, config = {}) {
     // Set config
@@ -18,14 +16,12 @@ class Goomba {
     this.FRAME_WIDTH = config.FRAME_WIDTH || this.FRAME_WIDTH;
     this.FRAME_HEIGHT = config.FRAME_HEIGHT || this.FRAME_HEIGHT;
     this.SPAWN_X = this.FRAME_WIDTH / 2 + config.SPAWN_X || this.FRAME_WIDTH / 2;
-    this.SPAWN_Y = window.innerHeight - config.SPAWN_Y || window.innerHeight;
+    this.SPAWN_Y = scene.cameras.main.height - config.SPAWN_Y || scene.cameras.main.height;
     this.SPRITE_KEY = config.SPRITE_KEY || this.SPRITE_KEY;
-    this.SPRITE_PATH = config.SPRITE_PATH || this.SPRITE_PATH;
     this.BOUNCE = config.BOUNCE || this.BOUNCE;
     this.COLLIDE_WITH_WORLD = config.COLLIDE_WITH_WORLD || this.COLLIDE_WITH_WORLD;
     // // Other
     this.SCALE = config.SCALE || this.SCALE;
-    this.SPRITE = config.SPRITE || this.SPRITE;
 
     // Create Goomba
     this.create(scene);
@@ -37,20 +33,20 @@ class Goomba {
     scene.player.setCollideWorldBounds(this.COLLIDE_WITH_WORLD);
 
     scene.anims.create({
-      key: 'left',
+      key: "left",
       frames: scene.anims.generateFrameNumbers(this.SPRITE_KEY, { start: 0, end: 2 }),
       frameRate: 10,
       repeat: -1,
     });
 
     scene.anims.create({
-      key: 'turn',
+      key: "turn",
       frames: [{ key: this.SPRITE_KEY, frame: 3 }],
       frameRate: 20,
     });
 
     scene.anims.create({
-      key: 'right',
+      key: "right",
       frames: scene.anims.generateFrameNumbers(this.SPRITE_KEY, { start: 4, end: 6 }),
       frameRate: 10,
       repeat: -1,
@@ -62,18 +58,40 @@ class Goomba {
   cursorsHandler(scene) {
     if (scene.cursors.left.isDown) {
       scene.player.setVelocityX(-160);
-      scene.player.anims.play('left', true);
+      scene.player.anims.play("left", true);
+      this.moveBackround(scene, 0);
     } else if (scene.cursors.right.isDown) {
       scene.player.setVelocityX(160);
-      scene.player.anims.play('right', true);
+      scene.player.anims.play("right", true);
+      this.moveBackround(scene, 1);
     } else {
       scene.player.setVelocityX(0);
-      scene.player.anims.play('turn');
+      scene.player.anims.play("turn");
     }
     // Jump
-    if ((scene.cursors.up.isDown || scene.cursors.space.isDown) && scene.player.body.touching.down) {
+    if ((scene.cursors.up.isDown || scene.cursors.space.isDown) && scene.player.body.onFloor()) {
       scene.player.setVelocityY(-400);
     }
+  }
+
+  moveBackround(scene, option) {
+    if (option === 0) {
+      scene.woodFar.tilePositionX -= 0.05;
+      scene.woodMid.tilePositionX -= 0.1;
+      scene.woodClose.tilePositionX -= 0.4;
+
+      // scene.platforms.children.entries.forEach((element) => {
+      //   element.x += 0.5;
+      // });
+    } else if (option === 1) {
+      scene.woodFar.tilePositionX += 0.05;
+      scene.woodMid.tilePositionX += 0.1;
+      scene.woodClose.tilePositionX += 0.4;
+
+      // scene.platforms.children.entries.forEach((element) => {
+      //   element.x -= 0.5;
+      // });
+    } else return;
   }
 }
 
