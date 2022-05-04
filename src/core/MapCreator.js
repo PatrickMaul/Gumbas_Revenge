@@ -23,7 +23,11 @@ class MapCreator {
         // Interaktion mit Goomba
         scene.Goomba = new Goomba(scene)
         scene.solidBackground.setCollisionByProperty({collides: true})
-        scene.physics.add.collider(scene.player,scene.solidBackground)  
+        scene.physics.add.collider(scene.player,scene.solidBackground) 
+            
+        // Kamera-Settings erstmal hierhin 
+        scene.cameras.main.startFollow(scene.player)
+        scene.cameras.main.zoomTo(2); 
     }
 
     static createEnemies(scene)

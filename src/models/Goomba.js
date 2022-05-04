@@ -58,9 +58,7 @@ class Goomba {
 
     scene.cursors = scene.input.keyboard.createCursorKeys();
 
-    // Kamera-Settings erstmal hierhin 
-    scene.cameras.main.startFollow(scene.player)
-    scene.cameras.main.zoomTo(2);
+
 
   }
 
