@@ -3,6 +3,7 @@ import Preload from "./scenes/Preload";
 import Menu from "./scenes/menu";
 import TestLevel from "./scenes/levels/test";
 import Timer from "./core/Timer";
+import SBMTestLevel from "./scenes/SBMTestLevel";
 
 window.timer = new Timer()
 class Game extends Phaser.Game {
@@ -25,8 +26,8 @@ class Game extends Phaser.Game {
     this.scene.add("Preload", Preload, false);
     this.scene.add("Menu", Menu, false);
     this.scene.add("TestLevel", TestLevel, false);
-
-    this.scene.start("Preload");
+    this.scene.add("SBMTestLevel", SBMTestLevel, false);
+    this.scene.start("SBMTestLevel");
   }
 }
 

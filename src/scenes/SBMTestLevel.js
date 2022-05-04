@@ -39,7 +39,7 @@ export default class SBMTestLevel extends Phaser.Scene
 
 
          MapCreator.createMap(this);
-         MapCreator.createEnemy(this);
+         MapCreator.createEnemies(this);
 
          // Enemy Creation
         //  const {windth,height} =this.scale

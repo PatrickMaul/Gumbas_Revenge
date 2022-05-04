@@ -28,7 +28,7 @@ class MapCreator {
 
     static createEnemies(scene)
     { 
-        const {windth,height} =scene.scale
+        const {windth,height} = scene.scale
         const objectLayer = scene.map.getObjectLayer('object');
         objectLayer.objects.forEach(objData => {
             const { x,y,name} = objData
@@ -45,8 +45,8 @@ class MapCreator {
                  default: break
                     
             }
+        })
     }
-
 }
 
 export default MapCreator;
