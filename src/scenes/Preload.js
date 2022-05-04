@@ -1,4 +1,4 @@
-import config from "../config";
+import config from "./config";
 class Preload extends Phaser.Scene {
   PROGRESS_BAR_WIDTH = 200;
   PROGRESS_BAR_HEIGHT = 30;
