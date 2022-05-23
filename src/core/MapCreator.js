@@ -1,14 +1,15 @@
 import Goomba from '../models/Goomba'
 
-class MapCreator {
+class  MapCreator {
 
-    
-    static loadMap (scene)
+
+    static loadMap (scene,filename)
     { // lädt die Maps und und den Goomba ins Preload.         
         scene.load.spritesheet('goomba', './src/assets/goomba.png', { frameWidth: 32, frameHeight: 32 });
         scene.load.image('tilesheet','./src/assets/tiles/SuperMarioBros_TSM.png')
-        scene.load.tilemapTiledJSON('ErstellteMap','./src/assets/tiles/NiceMap.json')
+        scene.load.tilemapTiledJSON('ErstellteMap',`./src/assets/tiles/${filename}.json`)
     }
+
     static createMap(scene)
     { // Erstellt die Map und die Backgrounds.
         
@@ -25,14 +26,17 @@ class MapCreator {
         scene.solidBackground.setCollisionByProperty({collides: true})
         scene.physics.add.collider(scene.player,scene.solidBackground) 
             
-        // Kamera-Settings erstmal hierhin 
-        scene.cameras.main.startFollow(scene.player)
-        scene.cameras.main.zoomTo(2); 
+        // Kamera-Settings 
+        scene.cameras.main.startFollow(scene.player)  
+        scene.cameras.main.zoomTo(2.5);
+        scene.cameras.main.x -= 1900;
+
     }
 
     static createEnemies(scene)
-    { 
-        const {windth,height} = scene.scale
+    {   // Erstellt die Objekte (z.B. Mit den Namen enemySpawn) aus dem angegeben Layer bject
+        // object ist der Object - LayerName  und enemySpawn die Objektnamen
+  
         const objectLayer = scene.map.getObjectLayer('object');
         objectLayer.objects.forEach(objData => {
             const { x,y,name} = objData
