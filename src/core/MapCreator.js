@@ -18,19 +18,24 @@ class  MapCreator {
         scene.tileset = scene.map.addTilesetImage('SuperMarioBros_TSM','tilesheet');
 
         // Backgrounds
-        scene.solidBackground = scene.map.createLayer('SolidBackground',scene.tileset)
-        scene.Background = scene.map.createLayer('Background',scene.tileset)
+        scene.SolidBackground = scene.map.createLayer('SolidBackground',scene.tileset)
+        //scene.Background = scene.map.createLayer('Background',scene.tileset)
 
         // Interaktion mit Goomba
         scene.Goomba = new Goomba(scene)
-        scene.solidBackground.setCollisionByProperty({collides: true})
-        scene.physics.add.collider(scene.player,scene.solidBackground) 
+        scene.SolidBackground.setCollisionByProperty({collides: true})
+        scene.physics.add.collider(scene.player,scene.SolidBackground) 
             
         // Kamera-Settings 
         scene.cameras.main.startFollow(scene.player)  
         scene.cameras.main.zoomTo(2.5);
         scene.cameras.main.x -= 1900;
 
+        // // Um Das Level zu beenden
+        // scene.FinishLevel = scene.map.createLayer('FinishLevel',scene.tileset)
+        // scene.FinishLevel.setCollisionByProperty({collides: true}) 
+        // scene.physics.add.collider(scene.player,scene.FinishLevel)
+        //  //this.physics.add.collider(player, FinishLevel, finishlevel, null, this); 
     }
 
     static createEnemies(scene)
@@ -46,7 +51,7 @@ class  MapCreator {
                 case 'enemySpawn':
                     {  
                        const enemy =  scene.physics.add.sprite(x, y, 'goomba');
-                       scene.physics.add.collider(enemy,scene.solidBackground)
+                       scene.physics.add.collider(enemy,scene.SolidBackground)
 
                        break
                     }

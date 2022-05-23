@@ -4,7 +4,8 @@ import Menu from "./scenes/menu";
 import TestLevel from "./scenes/levels/test";
 import Timer from "./core/Timer";
 import SBMTestLevel from "./scenes/SBMTestLevel";
-import GameOver from "./core/GameOver";
+import StartLevel from "./scenes/StartLevel";
+import GameOver from "./scenes/GameOver";
 
 
 window.timer = new Timer()
@@ -30,7 +31,8 @@ class Game extends Phaser.Game {
     this.scene.add("TestLevel", TestLevel, false);
     this.scene.add("SBMTestLevel", SBMTestLevel, false);
     this.scene.add("GameOver", GameOver, false);
-    this.scene.start("GameOver");
+    this.scene.add("StartLevel", StartLevel, false);
+    this.scene.start("StartLevel");
   }
 }
 

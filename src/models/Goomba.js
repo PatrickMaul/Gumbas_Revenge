@@ -17,7 +17,7 @@ class Goomba {
     // // Settings
     this.FRAME_WIDTH = config.FRAME_WIDTH || this.FRAME_WIDTH;
     this.FRAME_HEIGHT = config.FRAME_HEIGHT || this.FRAME_HEIGHT;
-    this.SPAWN_X = 60
+    this.SPAWN_X = 200  // angepasst, damit ich das Level links umranden kann
     this.SPAWN_Y = 60
     this.SPRITE_KEY = config.SPRITE_KEY || this.SPRITE_KEY;
     this.SPRITE_PATH = config.SPRITE_PATH || this.SPRITE_PATH;

@@ -3,13 +3,10 @@ import Goomba from '../models/Goomba'
 import MapCreator from '../core/MapCreator';
 import Background from "../core/Background.js";
 
-
 var GameOver = false;
 export default class SBMTestLevel extends Phaser.Scene
 {
- constructor(){
-     super('ErstesLevel')
- }
+
     
     preload()
     {   
@@ -17,7 +14,7 @@ export default class SBMTestLevel extends Phaser.Scene
         MapCreator.loadMap(this,"StartLevel");
         this.load.image("test-tile", "./src/assets/test-tile.png");
         this.background = new Background(this);
- 
+
     }
 
     create()
@@ -40,7 +37,7 @@ export default class SBMTestLevel extends Phaser.Scene
     {
          this.Goomba.cursorsHandler(this)
          if(GameOver){
-            this.player.setTint(0xff0000);
+            this.scene.start('ErstesLevel')
          }
 
     }
