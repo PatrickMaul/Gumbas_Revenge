@@ -1,5 +1,5 @@
 import Goomba from '../models/Goomba'
-
+import Background from "../core/Background.js";
 class  MapCreator {
 
 
@@ -8,19 +8,23 @@ class  MapCreator {
         scene.load.spritesheet('goomba', './src/assets/goomba.png', { frameWidth: 32, frameHeight: 32 });
         scene.load.image('tilesheet','./src/assets/tiles/SuperMarioBros_TSM.png')
         scene.load.tilemapTiledJSON('ErstellteMap',`./src/assets/tiles/${filename}.json`)
+        scene.background = new Background(scene);  // Parallax-Hintergrund
+
     }
 
     static createMap(scene)
     { // Erstellt die Map und die Backgrounds.
-        
+
         // Maps
         scene.map = scene.make.tilemap({key: 'ErstellteMap'})
         scene.tileset = scene.map.addTilesetImage('SuperMarioBros_TSM','tilesheet');
-
+       
         // Backgrounds
+        scene.background.create(scene);
         scene.SolidBackground = scene.map.createLayer('SolidBackground',scene.tileset)
+        
         //scene.Background = scene.map.createLayer('Background',scene.tileset)
-
+        
         // Interaktion mit Goomba
         scene.Goomba = new Goomba(scene)
         scene.SolidBackground.setCollisionByProperty({collides: true})
@@ -31,11 +35,13 @@ class  MapCreator {
         scene.cameras.main.zoomTo(2.5);
         scene.cameras.main.x -= 1900;
 
-        // // Um Das Level zu beenden
-        // scene.FinishLevel = scene.map.createLayer('FinishLevel',scene.tileset)
-        // scene.FinishLevel.setCollisionByProperty({collides: true}) 
-        // scene.physics.add.collider(scene.player,scene.FinishLevel)
-        //  //this.physics.add.collider(player, FinishLevel, finishlevel, null, this); 
+        // Um Das Level zu beenden
+        scene.Gameover = false;
+        scene.FinishLevel = scene.map.createLayer('FinishLevel',scene.tileset)
+        scene.FinishLevel.setCollisionByProperty({collides: true}) 
+        scene.physics.add.collider(scene.player, scene.FinishLevel, () => scene.GameOver = true, null, this);
+
+
     }
 
     static createEnemies(scene)
@@ -61,6 +67,10 @@ class  MapCreator {
         })
     }
 }
+
+
+
+
 
 export default MapCreator;
   

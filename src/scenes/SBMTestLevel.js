@@ -13,33 +13,19 @@ export default class SBMTestLevel extends Phaser.Scene
     
     preload()
     {   
-        // TestLevel
         MapCreator.loadMap(this,"StartLevel");
-        this.load.image("test-tile", "./src/assets/test-tile.png");
-        this.background = new Background(this);
- 
     }
 
     create()
     {
-        this.background.create(this);
-
-         // TestLevel
          MapCreator.createMap(this);
-         //MapCreator.createEnemies(this);
-
-        // // Um Das Level zu beenden
-        this.FinishLevel = this.map.createLayer('FinishLevel',this.tileset)
-        this.FinishLevel.setCollisionByProperty({collides: true}) 
-        //this.physics.add.collider(this.player,this.FinishLevel)
-        this.physics.add.collider(this.player, this.FinishLevel, finishlevel, null, this); 
-
     }
 
     update()
     {
          this.Goomba.cursorsHandler(this)
-         if(GameOver){
+         
+         if(this.GameOver){
             this.player.setTint(0xff0000);
          }
 
