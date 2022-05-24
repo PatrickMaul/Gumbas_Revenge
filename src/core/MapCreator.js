@@ -77,7 +77,8 @@ class  MapCreator {
             window.setTimeout(() => Scene.scene.start(SceneName),3000)
         }
         if(Scene.PlayerDead){   // Was soll passieren, wenn man auf ein GameOver Tile kommt
-            Scene.scene.start('StartScreen')
+            Scene.scene.start('Preload')
+            window.setTimeout(() => Scene.scene.start('StartScreen'),3000)
         }
     } 
 
