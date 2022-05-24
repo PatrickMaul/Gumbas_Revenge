@@ -31,7 +31,7 @@ class Game extends Phaser.Game {
     this.scene.add("GameOver", GameOver, false);
     this.scene.add("StartScreen", StartScreen, false);
     this.scene.start("Preload");
-    window.setTimeout(() => this.scene.start("StartScreen"),3000)
+    window.setTimeout(() => this.scene.start("StartScreen"),2500)
   }
 }
 
