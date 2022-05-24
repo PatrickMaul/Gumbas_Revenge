@@ -56,9 +56,9 @@ class  MapCreator {
         Scene.physics.add.collider(Scene.player, Scene.FinishScene, () => Scene.SuccessfulFinished = true, null, this); // Wenn man kollidiert, dann wird SuccessfulFinished=true gesetzt.
         
         // Kamera-Settings 
-        Scene.cameras.main.startFollow(Scene.player)  
+        Scene.cameras.main.startFollow(Scene.player,false,0.1,0.1,-750,+32)  
         Scene.cameras.main.zoomTo(2.5);
-        Scene.cameras.main.x -= 1900;       
+
     }
 
     /**
