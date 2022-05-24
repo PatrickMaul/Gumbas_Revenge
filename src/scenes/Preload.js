@@ -20,13 +20,15 @@ class Preload extends Phaser.Scene {
     this.initProgressBar();
 
     // LOAD STUFF
-    for (let i = 0; i < 500; i++)
+    for (let i = Phaser.Math.RND.frac(); i < 500; i++) // Damit man immer unterschiedliche Sachen lädt
     {
       this.load.spritesheet(`${i}`, "./src/assets/goomba.png", { frameWidth: 32, frameHeight: 32 });
     }
-  }
 
+  }
+  
   initProgressBar() {
+    this.cameras.main.x = (-this.cameras.main.width + window.innerWidth)/2;
     const borderWidth = this.PROGRESS_BAR_BORDER_WIDTH;
     const progressBorder = this.add.graphics();
     const progressBar = this.add.graphics();
@@ -78,7 +80,8 @@ class Preload extends Phaser.Scene {
       progressBar.destroy();
       progressBorder.destroy();
       loadingText.destroy();
-
+      
+      
       // if (config.loadTestLevel) return this.scene.start("TestLevel");
       // this.scene.start("Menu");
     });

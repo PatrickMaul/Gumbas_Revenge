@@ -54,6 +54,8 @@ class  MapCreator {
         Scene.physics.add.collider(Scene.player,Scene.UpperBackground) 
         Scene.SuccessfulFinished = false;
         Scene.physics.add.collider(Scene.player, Scene.FinishScene, () => Scene.SuccessfulFinished = true, null, this); // Wenn man kollidiert, dann wird SuccessfulFinished=true gesetzt.
+        Scene.PlayerDead = false;
+        Scene.physics.add.collider(Scene.player, Scene.Dead, () => Scene.PlayerDead = true, null, this); // Wenn man kollidiert, dann wird SuccessfulFinished=true gesetzt.
         
         // Kamera-Settings 
         Scene.cameras.main.startFollow(Scene.player,false,0.1,0.1,-750,+32)  
@@ -71,9 +73,13 @@ class  MapCreator {
         Scene.Goomba.cursorsHandler(Scene)
 
         if(Scene.SuccessfulFinished){   // Was soll passieren, wenn man auf ein GameOver Tile kommt
-            Scene.scene.start(SceneName)
+            Scene.scene.start('Preload')
+            window.setTimeout(() => Scene.scene.start(SceneName),3000)
         }
-    }
+        if(Scene.PlayerDead){   // Was soll passieren, wenn man auf ein GameOver Tile kommt
+            Scene.scene.start('StartScreen')
+        }
+    } 
 
 
     /**
