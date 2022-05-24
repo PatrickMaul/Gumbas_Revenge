@@ -17,8 +17,8 @@ class Goomba {
     // // Settings
     this.FRAME_WIDTH = config.FRAME_WIDTH || this.FRAME_WIDTH;
     this.FRAME_HEIGHT = config.FRAME_HEIGHT || this.FRAME_HEIGHT;
-    this.SPAWN_X = 200  // angepasst, damit ich das Level links umranden kann
-    this.SPAWN_Y = 60
+    this.SPAWN_X = 250  // angepasst, damit ich das Level links umranden kann
+    this.SPAWN_Y = 300
     this.SPRITE_KEY = config.SPRITE_KEY || this.SPRITE_KEY;
     this.SPRITE_PATH = config.SPRITE_PATH || this.SPRITE_PATH;
     this.BOUNCE = config.BOUNCE || this.BOUNCE;
@@ -75,7 +75,7 @@ class Goomba {
     }
     // Jump
     if ((scene.cursors.up.isDown || scene.cursors.space.isDown) && scene.player.body.onFloor()) {
-      scene.player.setVelocityY(-400);
+      scene.player.setVelocityY(-260); // Gomba exakt 4 Tiles hochspringen 
     }
   }
 }
