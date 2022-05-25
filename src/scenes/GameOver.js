@@ -12,7 +12,7 @@ class GameOver extends Phaser.Scene {
 
   create() {
     // Start timer
-    window.timer.start();
+    Timer.start();
     this.background.create(this);
     MapCreator.loadLevel(this);
     this.GOOMBA = new Goomba(this); // Create goomba

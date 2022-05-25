@@ -106,13 +106,13 @@ class MapCreator {
 
     if (this.FINISH) {
       console.log("Finish");
-      console.log(window.timer.time()); // Log Timer
+      console.log(Timer.time()); // Log Timer
       this.FINISH = false;
       phaserScene.scene.start(this.NEW_MAP_KEY);
     }
     if (this.GAME_OVER) {
       console.log("Game Over");
-      console.log(window.timer.time()); // Log Timer
+      console.log(Timer.time()); // Log Timer
       this.GAME_OVER = false;
       phaserScene.scene.start("GameOver");
     }

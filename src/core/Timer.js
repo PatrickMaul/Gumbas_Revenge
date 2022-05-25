@@ -1,11 +1,11 @@
 export default class Timer {
   startTime = null;
 
-  start() {
+  static start() {
     this.startTime = performance.now();
   }
 
-  time() {
+  static time() {
     return parseFloat(((performance.now() - this.startTime) / 1000).toFixed(2));
   }
 }

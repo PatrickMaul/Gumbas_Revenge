@@ -5,7 +5,7 @@ import TestLevel from "./scenes/levels/test";
 import Timer from "./core/Timer";
 import GameOver from "./scenes/GameOver";
 
-window.timer = new Timer();
+window.Timer = Timer;
 class Game extends Phaser.Game {
   constructor() {
     const config = {
