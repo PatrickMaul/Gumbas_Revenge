@@ -11,5 +11,7 @@ export default class Enemy {
         }
 
         gameObject.setVelocityX(-gameObject.CONFIG.SPEED)
+        gameObject.setScale(0.5)
+        gameObject.refreshBody()
     }
 }

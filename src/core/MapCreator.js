@@ -1,3 +1,5 @@
+import { spawnEnemies, handlePlatformEnemyCollision } from "./utils";
+
 /**
  * This class is loading evrything we need for our Level
  * - Loading levelmap
@@ -44,7 +46,7 @@ class MapCreator {
     // Create the map layers and the background
     // ATENTION: You have to take care of the order
     this.MAP_LAYERS.forEach((layer) => {
-      phaserScene[layer.name] = phaserScene.levelMap.createLayer(layer.name, phaserScene.tileset);
+      phaserScene[layer.name] = phaserScene.levelMap.createStaticLayer(layer.name, phaserScene.tileset, 0, 0);
     });
 
     // Invisible layers made invisible
@@ -59,6 +61,8 @@ class MapCreator {
    * @param {Scene} phaserScene The scene object.
    */
   static addPhysics(phaserScene) {
+    spawnEnemies(phaserScene)
+
     // Iterate through layers, filtered by prefix "LM_"
     this.MAP_LAYERS.filter((layer) => layer.name.includes("LM_")).forEach((layer) => {
       phaserScene[layer.name].setCollisionByProperty({ collides: true });
@@ -82,8 +86,16 @@ class MapCreator {
           null,
           this
         );
-      } else phaserScene.physics.add.collider(phaserScene.player, phaserScene[layer.name]);
+      } else {
+        phaserScene.physics.add.collider(phaserScene.player, phaserScene[layer.name]);
+      }
     });
+    this.MAP_LAYERS.forEach((layer) => {
+      phaserScene.physics.add.collider(phaserScene[layer.name], phaserScene.enemies, handlePlatformEnemyCollision.bind(phaserScene))
+    })
+
+    
+
   }
 
   /**
@@ -94,6 +106,7 @@ class MapCreator {
     // Camera settings
     phaserScene.cameras.main.startFollow(phaserScene.player, false, 0.1, 0.1, -750, +32);
     phaserScene.cameras.main.zoomTo(2);
+
   }
 
   /**

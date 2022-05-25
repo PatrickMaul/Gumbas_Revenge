@@ -8,7 +8,7 @@ export function spawnEnemies(scene) {
 
     // colliders
     scene.physics.add.collider(scene.player, scene.enemies, handlePlayerCollision.bind(scene))
-    scene.physics.add.collider(scene.platforms, scene.enemies, handlePlatformEnemyCollision.bind(scene))
+    //scene.physics.add.collider(scene.platforms, scene.enemies, handlePlatformEnemyCollision.bind(scene))
     scene.physics.add.collider(scene.enemies, scene.enemies, handleEnemyCollision.bind(scene))
 }
 
@@ -30,21 +30,23 @@ function handlePlayerCollision(player, enemy) {
         enemy.destroy()
     }
     else if(enemy.body.touching.right) {
-        this.restartScene()
+        console.log('enemy hit')
     }
     else if(enemy.body.touching.left) {
-        this.restartScene()
+        console.log('enemy hit')
     }
     else if(enemy.body.touching.down) {
-        this.restartScene()
+        console.log('enemy hit')
     }
 }
 
-function handlePlatformEnemyCollision(platform, enemy) {
-    if(enemy.body.touching.right) {
+export function handlePlatformEnemyCollision(enemy) {
+    // apparently we need to use body.blocked instead of body.touching on collision with tilemaps or some shit... WTF BRO
+    // https://www.html5gamedevs.com/topic/23219-playerbodytouchingdown-not-working/
+    if(enemy.body.blocked.right || enemy.body.touching.right) {
         enemy.setVelocityX(-enemy.CONFIG.SPEED)
     }
-    else if(enemy.body.touching.left) {
+    else if(enemy.body.blocked.left || enemy.body.touching.left) {
         enemy.setVelocityX(enemy.CONFIG.SPEED)
     }
 }
