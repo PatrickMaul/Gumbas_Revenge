@@ -3,11 +3,9 @@ import Preload from "./scenes/Preload";
 import Menu from "./scenes/menu";
 import TestLevel from "./scenes/levels/test";
 import Timer from "./core/Timer";
-import StartScreen from "./scenes/StartScreen";
 import GameOver from "./scenes/GameOver";
 
-
-window.timer = new Timer()
+window.timer = new Timer();
 class Game extends Phaser.Game {
   constructor() {
     const config = {
@@ -29,9 +27,7 @@ class Game extends Phaser.Game {
     this.scene.add("Menu", Menu, false);
     this.scene.add("TestLevel", TestLevel, false);
     this.scene.add("GameOver", GameOver, false);
-    this.scene.add("StartScreen", StartScreen, false);
     this.scene.start("Preload");
-    window.setTimeout(() => this.scene.start("StartScreen"),2500)
   }
 }
 
