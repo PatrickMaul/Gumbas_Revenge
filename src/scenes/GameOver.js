@@ -6,10 +6,11 @@ class GameOver extends Phaser.Scene {
   GOOMBA = null;
 
   preload() {
-    console.log("GAMEOVER");
     this.background = new Background(this); // Load background
     MapCreator.preload(this, { MAP_KEY: "Game_Over" });
+    console.log(this.background);
   }
+
   create() {
     this.background.create(this);
     MapCreator.loadLevel(this);
