@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.5" orientation="orthogonal" renderorder="right-down" width="257" height="28" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="1">
+<map version="1.8" tiledversion="1.8.5" orientation="orthogonal" renderorder="right-down" width="257" height="28" tilewidth="16" tileheight="16" infinite="0" nextlayerid="16" nextobjectid="17">
  <editorsettings>
-  <export target="../Documents/Code/Schule/Gumbas_Revenge/src/assets/tiles/First_test_level_PM.json" format="json"/>
+  <export target="../First_test_level_PM.json" format="json"/>
  </editorsettings>
  <tileset firstgid="1" name="SuperMarioWorld_TSM" tilewidth="16" tileheight="16" spacing="1" margin="1" tilecount="2352" columns="48">
-  <image source="../Documents/Code/Schule/Gumbas_Revenge/src/assets/tiles/SuperMarioWorld_TSM.png" width="817" height="845"/>
+  <image source="../SuperMarioWorld_TSM.png" width="817" height="845"/>
   <tile id="11">
    <properties>
     <property name="collides" type="bool" value="true"/>
@@ -599,4 +599,24 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2042,2043,2044,2045,2042,2043,2044,2045,2042,2043,2044,2045,2042,2043,2044,2045,2042,2043,2044,2045,2042,2043,2044,2045,2042,2043,2044,2045,2042,2043,2044,2045,2042,2043,2042,2043,2044,2045,2042,2043,2044,2045,2042,2043,2044,2045,2044,2045,2042,2043,2044,2045,2042,2043,2044,2045,2043,2044,2045,2042,2043,2044,2045,2042,2043,2044,2045,2043,2044,2045,2042,2043,2044,2045,2042,2043,2044,2045,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
+ <objectgroup id="15" name="ENEMY">
+  <properties>
+   <property name="id" value="TOAD"/>
+  </properties>
+  <object id="13" gid="2046" x="213.333" y="348.667" width="16" height="16">
+   <properties>
+    <property name="enemyId" value="TOAD"/>
+   </properties>
+  </object>
+  <object id="14" gid="2046" x="828" y="337.333" width="16" height="16">
+   <properties>
+    <property name="enemyId" value="TOAD"/>
+   </properties>
+  </object>
+  <object id="15" gid="2046" x="693.333" y="253.333" width="16" height="16">
+   <properties>
+    <property name="enemyId" value="TOAD"/>
+   </properties>
+  </object>
+ </objectgroup>
 </map>

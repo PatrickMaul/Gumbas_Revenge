@@ -1,5 +1,5 @@
 export default class Enemy {
-    SPEED = 100
+    SPEED = 80
     PLAYER_COLLISION_TOP_VELOCITY = -200
 
     constructor(scene, config) {
@@ -11,7 +11,7 @@ export default class Enemy {
         }
 
         gameObject.setVelocityX(-gameObject.CONFIG.SPEED)
-        gameObject.setScale(0.5)
+        gameObject.setScale(1)
         gameObject.refreshBody()
     }
 }

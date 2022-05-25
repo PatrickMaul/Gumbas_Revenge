@@ -63,37 +63,38 @@ class MapCreator {
   static addPhysics(phaserScene) {
     spawnEnemies(phaserScene)
 
-    // Iterate through layers, filtered by prefix "LM_"
-    this.MAP_LAYERS.filter((layer) => layer.name.includes("LM_")).forEach((layer) => {
-      phaserScene[layer.name].setCollisionByProperty({ collides: true });
-    });
+    for(let i = 0; i < this.MAP_LAYERS.length; i++) {
+      const layerName = this.MAP_LAYERS[i].name
+      const layer = phaserScene[this.MAP_LAYERS[i].name]
 
-    // Iterate through layers, filtered by prefix "C_"
-    this.MAP_LAYERS.filter((layer) => layer.name.includes("C_")).forEach((layer) => {
-      if (layer.name.includes("Dead")) {
-        phaserScene.physics.add.collider(
-          phaserScene.player,
-          phaserScene[layer.name],
-          () => (this.GAME_OVER = true),
-          null,
-          this
-        );
-      } else if (layer.name.includes("Finish")) {
-        phaserScene.physics.add.collider(
-          phaserScene.player,
-          phaserScene[layer.name],
-          () => (this.FINISH = true),
-          null,
-          this
-        );
-      } else {
-        phaserScene.physics.add.collider(phaserScene.player, phaserScene[layer.name]);
+      if(layerName.includes('LM_')) {
+        layer.setCollisionByProperty({ collides: true });
       }
-    });
-    this.MAP_LAYERS.forEach((layer) => {
-      phaserScene.physics.add.collider(phaserScene[layer.name], phaserScene.enemies, handlePlatformEnemyCollision.bind(phaserScene))
-    })
 
+      if(layerName.includes('C_')) {
+        if (layerName.includes("Dead")) {
+          phaserScene.physics.add.collider(
+            phaserScene.player,
+            layer,
+            () => (this.GAME_OVER = true),
+            null,
+            this
+          );
+        } else if (layerName.includes("Finish")) {
+          phaserScene.physics.add.collider(
+            phaserScene.player,
+            layer,
+            () => (this.FINISH = true),
+            null,
+            this
+          );
+        } else {
+          phaserScene.physics.add.collider(phaserScene.player, layer);
+        }
+      }
+
+      phaserScene.physics.add.collider(layer, phaserScene.enemies, handlePlatformEnemyCollision.bind(phaserScene))
+    }
     
 
   }

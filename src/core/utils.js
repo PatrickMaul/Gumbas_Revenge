@@ -3,8 +3,17 @@ import Toad from '../models/Toad'
 export function spawnEnemies(scene) {
     scene.enemies = scene.physics.add.group()
 
-    new Toad(scene, {SPAWN_X: 300, SPAWN_Y: scene.cameras.main.height / 2})
-    new Toad(scene, {SPAWN_X: 460, SPAWN_Y: scene.cameras.main.height / 2})
+    const enemies = scene.levelMap.getObjectLayer('ENEMY')
+
+    if(enemies) {
+        enemies.objects.forEach(enemy => {
+            const id = enemy.properties.filter(prop => prop.name === 'enemyId')[0].value
+            if(id === 'TOAD') {
+                new Toad(scene, {SPAWN_X: enemy.x, SPAWN_Y:enemy.y})
+            }
+        })
+    }
+   
 
     // colliders
     scene.physics.add.collider(scene.player, scene.enemies, handlePlayerCollision.bind(scene))
