@@ -20,7 +20,7 @@ class Preload extends Phaser.Scene {
     this.initProgressBar();
 
     this.load.spritesheet("goomba", "./src/assets/goomba.png", { frameWidth: 32, frameHeight: 32 }); // Goomba spritesheet
-    this.load.image("tilesheet", "./src/assets/tiles/SuperMarioWorld_TSM.png", 16, 16); // Map tilesheet
+    this.load.image("tilesheet", "./src/assets/tiled_maps/SuperMarioWorld_TSM.png", 16, 16); // Map tilesheet
   }
 
   initProgressBar() {

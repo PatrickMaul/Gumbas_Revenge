@@ -19,9 +19,9 @@ class MapCreator {
    */
   static preload(phaserScene, config = {}) {
     // Load config
-    this.MAP_KEY = config.MAP_KEY || "StartScreen_Map";
+    this.MAP_KEY = config.MAP_KEY || "Start_Screen_Map";
 
-    phaserScene.load.tilemapTiledJSON(`${this.MAP_KEY}`, `./src/assets/tiles/${this.MAP_KEY}.json`); // Json-Map (Map, welche in Tiled erstellt wurde.)
+    phaserScene.load.tilemapTiledJSON(`${this.MAP_KEY}`, `./src/assets/tiled_maps/${this.MAP_KEY}.json`); // Json-Map (Map, welche in Tiled erstellt wurde.)
   }
 
   /**
