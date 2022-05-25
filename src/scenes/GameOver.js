@@ -1,44 +1,26 @@
+import MapCreator from "../core/MapCreator";
+import Background from "../core/Background";
 import Goomba from "../models/Goomba";
-import Background from "../core/Background.js";
 
-// TODO delete file after project finished:
-// /scenes/levels/test.js
-// config.js                    loadTestLevel
-// /scenes/Preload.js           loadTestLevel
-// /assets/test-tile.png
-// index.js                     TestLevel
-class TestLevel extends Phaser.Scene {
+class GameOver extends Phaser.Scene {
+  GOOMBA = null;
+
   preload() {
-    this.load.image("test-tile", "./src/assets/test-tile.png");
-    this.background = new Background(this);
+    console.log("GAMEOVER");
+    this.background = new Background(this); // Load background
+    MapCreator.preload(this, { MAP_KEY: "Game_Over" });
   }
   create() {
     this.background.create(this);
-
-    this.platforms = this.physics.add.staticGroup();
-    this.GOOMBA = new Goomba(this, { SPAWN_X: 100, SPAWN_Y: this.cameras.main.height / 2 });
-
-    for (let i = 0; i < 15; i++) {
-      this.platforms.create(64 * i, this.cameras.main.height - 32, "test-tile");
-    }
-
-    const text = this.make.text({
-      x: this.cameras.main.width / 2,
-      y: 50,
-      text: 'GAME OVER',
-      style: {
-        font: '48px monoscape',
-        fill: '#ff0000',
-      },
-    });
-
-    text.x -= text.width / 2
-
-    this.physics.add.collider(this.player, this.platforms);
+    MapCreator.loadLevel(this);
+    this.GOOMBA = new Goomba(this); // Create goomba
+    MapCreator.addPhysics(this);
+    MapCreator.createCamera(this);
   }
 
   update() {
-    this.GOOMBA.cursorsHandler(this);
+    this.GOOMBA.cursorsHandler(this); // Goomba coursor handler
+    MapCreator.update(this, { MAP_KEY: "Preload" });
   }
 }
-export default TestLevel;
+export default GameOver;

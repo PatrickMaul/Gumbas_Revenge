@@ -6,6 +6,7 @@
  * - Creating the camera
  */
 class MapCreator {
+  MAP_KEY = null;
   MAP_LAYERS = null;
   FINISH = false;
   GAME_OVER = false;
@@ -17,9 +18,9 @@ class MapCreator {
    */
   static preload(phaserScene, config = {}) {
     // Load config
-    const MAP_KEY = config.MAP_KEY || "StartScreen_Map";
+    this.MAP_KEY = config.MAP_KEY || "StartScreen_Map";
 
-    phaserScene.load.tilemapTiledJSON("levelMap", `./src/assets/tiles/${MAP_KEY}.json`); // Json-Map (Map, welche in Tiled erstellt wurde.)
+    phaserScene.load.tilemapTiledJSON(`${this.MAP_KEY}`, `./src/assets/tiles/${this.MAP_KEY}.json`); // Json-Map (Map, welche in Tiled erstellt wurde.)
   }
 
   /**
@@ -28,7 +29,7 @@ class MapCreator {
    */
   static loadLevel(phaserScene) {
     // Create scene propertys
-    phaserScene.levelMap = phaserScene.make.tilemap({ key: "levelMap" });
+    phaserScene.levelMap = phaserScene.make.tilemap({ key: `${this.MAP_KEY}` });
     phaserScene.tileset = phaserScene.levelMap.addTilesetImage("SuperMarioWorld_TSM", "tilesheet");
 
     // Fill 'MAP_LAYERS' list
