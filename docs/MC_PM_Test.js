@@ -1,21 +1,18 @@
-import MapCreator from "../core/MapCreator";
-import Background from "../core/Background";
-import Goomba from "../models/Goomba";
+import MapCreator from "../../core/MapCreator";
+import Background from "../../core/Background";
+import Goomba from "../../models/Goomba";
 
-class GameOver extends Phaser.Scene {
+class TestLevel extends Phaser.Scene {
   GOOMBA = null;
 
   preload() {
     this.background = new Background(this); // Load background
-    MapCreator.preload(this, { MAP_KEY: "Game_Over" });
+    MapCreator.preload(this, { MAP_KEY: "First_test_level_PM" });
   }
-
   create() {
-    // Start timer
-    window.timer.start();
     this.background.create(this);
     MapCreator.loadLevel(this);
-    this.GOOMBA = new Goomba(this); // Create goomba
+    this.GOOMBA = new Goomba(this, { SPAWN_X: 350 }); // Create goomba
     MapCreator.addPhysics(this);
     MapCreator.createCamera(this);
   }
@@ -25,5 +22,4 @@ class GameOver extends Phaser.Scene {
     MapCreator.update(this, { MAP_KEY: "TestLevel" });
   }
 }
-
-export default GameOver;
+export default TestLevel;
