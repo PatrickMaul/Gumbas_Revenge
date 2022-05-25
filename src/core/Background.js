@@ -30,23 +30,23 @@ class Background {
     },
   ];
 
-  constructor(scene) {
+  constructor(phaserScene) {
     this.PATHS.forEach((path) => {
-      scene.load.image(path.tileKey, path.path);
+      phaserScene.load.image(path.tileKey, path.path);
     });
   }
 
-  create(scene) {
+  create(phaserScene) {
     this.PATHS.forEach((path) => {
-      scene[path.key] = scene.add.tileSprite(
-        scene.cameras.main.width / 2,
+      phaserScene[path.key] = phaserScene.add.tileSprite(
+        phaserScene.cameras.main.width / 2,
         224,
-        scene.cameras.main.width,
+        phaserScene.cameras.main.width,
         path.height,
         path.tileKey
       );
 
-      scene[path.key].setScale(1);
+      phaserScene[path.key].setScale(1);
     });
   }
 }
