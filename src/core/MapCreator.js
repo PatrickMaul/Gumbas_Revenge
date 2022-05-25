@@ -1,116 +1,117 @@
-import Goomba from '../models/Goomba'
-import Background from "../core/Background.js";
-class  MapCreator {
-/* Die Klasse MapCreator enthält statische Funktionen um die Maps/Backgrounds zu erstellen und die Gegner und Goomba zu spawnen.
-   Sie greift auf die Klasse Goomba zu um den Goomba zu spawnen und auf die Klasse Background um den Parallax-Hintergrund einzubinden.
-*/
+/**
+ * This class is loading evrything we need for our Level
+ * - Loading levelmap
+ * - Building the Level
+ * - Add physics (colliders etc.)
+ * - Creating the camera
+ */
+class MapCreator {
+  MAP_LAYERS = null;
+  FINISH = false;
+  GAME_OVER = false;
 
-    /**
-     * lädt die Maps/Spritesheet in den preload-Scope.
-     * @param {Scene} Scene Der this-Parameter wird später bei den Scenen als Argument eingefügt.
-     * @param {string} filename Der Dateiname der Json-Map.
-     */
-    static loadMap (Scene,filename)
-    {  
-        Scene.load.spritesheet('goomba', './src/assets/goomba.png', { frameWidth: 32, frameHeight: 32 }); 
-        Scene.load.image('tilesheet','./src/assets/tiles/SuperMarioWorld_TSM.png') // Tilesmap
-        Scene.load.tilemapTiledJSON('ErstellteMap',`./src/assets/tiles/${filename}.json`) // Json-Map (Map, welche in Tiled erstellt wurde.)
-        Scene.background = new Background(Scene);  // Parallax-Hintergrund
+  /**
+   * Loading needed data
+   * @param {Scene} phaserScene The scene object.
+   * @param {Object} config Config Object.
+   */
+  static preload(phaserScene, config = {}) {
+    // Load config
+    const MAP_KEY = config.MAP_KEY || "StartScreen_Map";
 
+    phaserScene.load.tilemapTiledJSON("levelMap", `./src/assets/tiles/${MAP_KEY}.json`); // Json-Map (Map, welche in Tiled erstellt wurde.)
+  }
+
+  /**
+   * Building the level
+   * @param {Scene} phaserScene The scene object.
+   */
+  static loadLevel(phaserScene) {
+    // Create scene propertys
+    phaserScene.levelMap = phaserScene.make.tilemap({ key: "levelMap" });
+    phaserScene.tileset = phaserScene.levelMap.addTilesetImage("SuperMarioWorld_TSM", "tilesheet");
+
+    // Fill 'MAP_LAYERS' list
+    this.MAP_LAYERS = phaserScene.levelMap.layers.map((layer) => {
+      return {
+        id: phaserScene.levelMap.layers.indexOf(layer),
+        name: layer.name,
+      };
+    });
+
+    // Create the map layers and the background
+    // ATENTION: You have to take care of the order
+    this.MAP_LAYERS.forEach((layer) => {
+      phaserScene[layer.name] = phaserScene.levelMap.createLayer(layer.name, phaserScene.tileset);
+    });
+
+    // Invisible layers made invisible
+    // Iterate through layers, filtered by prefix "I_"
+    this.MAP_LAYERS.filter((layer) => layer.name.includes("I_")).forEach((layer) => {
+      phaserScene[layer.name].alpha = 0;
+    });
+  }
+
+  /**
+   * Creates the map physics.
+   * @param {Scene} phaserScene The scene object.
+   */
+  static addPhysics(phaserScene) {
+    // Iterate through layers, filtered by prefix "LM_"
+    this.MAP_LAYERS.filter((layer) => layer.name.includes("LM_")).forEach((layer) => {
+      phaserScene[layer.name].setCollisionByProperty({ collides: true });
+    });
+    // Iterate through layers, filtered by prefix "C_"
+    this.MAP_LAYERS.filter((layer) => layer.name.includes("C_")).forEach((layer) => {
+      if (layer.name.includes("Dead")) {
+        phaserScene.physics.add.collider(
+          phaserScene.player,
+          phaserScene[layer.name],
+          () => (this.GAME_OVER = true),
+          null,
+          this
+        );
+      } else if (layer.name.includes("Finish")) {
+        phaserScene.physics.add.collider(
+          phaserScene.player,
+          phaserScene[layer.name],
+          () => (this.FINISH = true),
+          null,
+          this
+        );
+      } else phaserScene.physics.add.collider(phaserScene.player, phaserScene[layer.name]);
+    });
+  }
+
+  /**
+   * Creating the camera that follows the player.
+   * @param {Scene} phaserScene The scene object.
+   */
+  static createCamera(phaserScene) {
+    // Camera settings
+    phaserScene.cameras.main.startFollow(phaserScene.player, false, 0.1, 0.1, -750, +32);
+    phaserScene.cameras.main.zoomTo(2);
+  }
+
+  /**
+   * Updating the scene.
+   * @param {Scene} phaserScene The scene object.
+   */
+  static update(phaserScene, config = {}) {
+    // Load config
+    const MAP_KEY = config.MAP_KEY || "Preload";
+
+    if (this.FINISH) {
+      console.log("Finish");
+      this.FINISH = false;
+      phaserScene.scene.start(MAP_KEY);
     }
-    
-    /**
-     * Erstellt die Maps/Backgrounds und die Arcade-Physic mit Goomba und seiner Spiel-Umwelt.
-     * Außerdem wird die Kamera-Eigenschaften festgelegt.
-     * Dies passiert im create-Scope.
-     * @param {Scene} Scene Der this-Parameter wird später bei den Scenen als Argument eingefügt.
-     */
-    static createMap(Scene)
-    { 
-        // Verknüpfung zwischen der Tilesmap und der erstellten Json-Map in Tiled.
-        Scene.map = Scene.make.tilemap({key: 'ErstellteMap'})
-        Scene.tileset = Scene.map.addTilesetImage('SuperMarioWorld_TSM','tilesheet');
-               
-        // Das Erstellen der Layer des Hintergrung und Goomba
-        //(Die Reihenfolge ergibt die Überlappung, man legt jeweils den nächsten Background/Layer auf die vorherigen Layer).
-        Scene.InvisibleWall = Scene.map.createLayer('InvisibleWall',Scene.tileset) // Soll nicht gesehen werden
-        Scene.background.create(Scene);  // Parallax-Hintergrund
-        Scene.LowerBackground = Scene.map.createLayer('LowerBackground',Scene.tileset)
-        Scene.UpperBackground = Scene.map.createLayer('UpperBackground',Scene.tileset)        
-        Scene.FinishScene = Scene.map.createLayer('FinishScene',Scene.tileset)
-        Scene.Dead = Scene.map.createLayer('Dead',Scene.tileset)
-        Scene.Goomba = new Goomba(Scene)
-
-        // Hinzufügen der Kollision-Eigenschaft zu den einzelnen Layers
-        Scene.InvisibleWall.setCollisionByProperty({collides: true}) 
-        Scene.LowerBackground.setCollisionByProperty({collides: true})                 
-        Scene.UpperBackground.setCollisionByProperty({collides: true})
-        Scene.FinishScene.setCollisionByProperty({collides: true})
-        Scene.Dead.setCollisionByProperty({collides: true})
-
-        // Wie soll die Kollision zwischen Goomba und einem Tile eines Layer (mit collides = true) ausgeführt werden.
-        Scene.physics.add.collider(Scene.player,Scene.InvisibleWall) // normale Arcade-Physik
-        Scene.physics.add.collider(Scene.player,Scene.LowerBackground) 
-        Scene.physics.add.collider(Scene.player,Scene.UpperBackground) 
-        Scene.SuccessfulFinished = false;
-        Scene.physics.add.collider(Scene.player, Scene.FinishScene, () => Scene.SuccessfulFinished = true, null, this); // Wenn man kollidiert, dann wird SuccessfulFinished=true gesetzt.
-        Scene.PlayerDead = false;
-        Scene.physics.add.collider(Scene.player, Scene.Dead, () => Scene.PlayerDead = true, null, this); // Wenn man kollidiert, dann wird SuccessfulFinished=true gesetzt.
-        
-        // Kamera-Settings 
-        Scene.cameras.main.startFollow(Scene.player,false,0.1,0.1,-750,+32)  
-        Scene.cameras.main.zoomTo(2.5);
-
+    if (this.GAME_OVER) {
+      console.log("Game Over");
+      this.GAME_OVER = false;
+      phaserScene.scene.start("TestLevel");
     }
-
-    /**
-     * Beendet die Szene und führt die Standard-Funktionen für den update-Scope aus.
-     * @param {Scene} Scene Der this-Parameter wird später bei den Scenen als Argument eingefügt.
-     * @param {String} SceneName Der Szenenname der nächsten Szene. (Klassenname oder falls über super(...) diesen Namen verwenden.)
-     */
-    static RunMap(Scene,SceneName)
-    {
-        Scene.Goomba.cursorsHandler(Scene)
-
-        if(Scene.SuccessfulFinished){   // Was soll passieren, wenn man auf ein GameOver Tile kommt
-            Scene.scene.start('Preload')
-            window.setTimeout(() => Scene.scene.start(SceneName),2500)
-        }
-        if(Scene.PlayerDead){   // Was soll passieren, wenn man auf ein GameOver Tile kommt
-            Scene.scene.start('Preload')
-            window.setTimeout(() => Scene.scene.start('StartScreen'),2500)
-        }
-    } 
-
-
-    /**
-     * Erstellt die Objekte (z.B. Mit den Namen enemySpawn) aus dem angegeben Layer bject
-    object ist der Object - LayerName  und enemySpawn die Objektnamen
-     * @param {Scene} Scene Der this-Parameter wird später bei den Scenen als Argument eingefügt.
-     */
-    static createEnemies(Scene) // Hier Namensgebung noch anpassen!
-    {   
-  
-        const objectLayer = Scene.map.getObjectLayer('object');
-        objectLayer.objects.forEach(objData => {
-            const { x,y,name} = objData
-
-            switch(name)
-            {
-                case 'enemySpawn':
-                    {  
-                       const enemy =  Scene.physics.add.sprite(x, y, 'goomba');
-                       Scene.physics.add.collider(enemy,Scene.UpperBackground)
-                       Scene.physics.add.collider(enemy,Scene.LowerBackground)
-                       break
-                    }
-                 default: break
-                    
-            }
-        })
-    }
+  }
 }
 
-
 export default MapCreator;
-  
