@@ -2,96 +2,80 @@ class Goomba {
   // Fix settings
   FRAME_WIDTH = 32;
   FRAME_HEIGHT = 32;
-  SPAWN_X = null;
-  SPAWN_Y = null;
+  SPAWN_X = 60;
+  SPAWN_Y = 60;
   SPRITE_KEY = "goomba";
+  SPRITE_PATH = "./src/assets/goomba.png";
   BOUNCE = 0.2;
   COLLIDE_WITH_WORLD = true;
   // Other
-  SCALE = 1.5;
+  SCALE = 0.5;
+  SPRITE = null;
 
-  constructor(scene, config = {}) {
+  constructor(phaserScene, config = {}) {
     // Set config
     // // Settings
     this.FRAME_WIDTH = config.FRAME_WIDTH || this.FRAME_WIDTH;
     this.FRAME_HEIGHT = config.FRAME_HEIGHT || this.FRAME_HEIGHT;
-    this.SPAWN_X = this.FRAME_WIDTH / 2 + config.SPAWN_X || this.FRAME_WIDTH / 2;
-    this.SPAWN_Y = scene.cameras.main.height - config.SPAWN_Y || scene.cameras.main.height;
+    this.SPAWN_X = config.SPAWN_X || 250; // Change default
+    this.SPAWN_Y = config.SPAWN_Y || 300; // Change default
     this.SPRITE_KEY = config.SPRITE_KEY || this.SPRITE_KEY;
+    this.SPRITE_PATH = config.SPRITE_PATH || this.SPRITE_PATH;
     this.BOUNCE = config.BOUNCE || this.BOUNCE;
     this.COLLIDE_WITH_WORLD = config.COLLIDE_WITH_WORLD || this.COLLIDE_WITH_WORLD;
     // // Other
     this.SCALE = config.SCALE || this.SCALE;
+    this.SPRITE = config.SPRITE || this.SPRITE;
 
     // Create Goomba
-    this.create(scene);
+    this.create(phaserScene);
   }
 
-  create(scene) {
-    scene.player = scene.physics.add.sprite(this.SPAWN_X, this.SPAWN_Y, this.SPRITE_KEY).setScale(this.SCALE);
-    scene.player.setBounce(this.BOUNCE);
-    scene.player.setCollideWorldBounds(this.COLLIDE_WITH_WORLD);
+  create(phaserScene) {
+    phaserScene.player = phaserScene.physics.add
+      .sprite(this.SPAWN_X, this.SPAWN_Y, this.SPRITE_KEY)
+      .setScale(this.SCALE);
+    phaserScene.player.setBounce(this.BOUNCE);
+    phaserScene.player.setCollideWorldBounds(this.COLLIDE_WITH_WORLD);
 
-    scene.anims.create({
+    phaserScene.anims.create({
       key: "left",
-      frames: scene.anims.generateFrameNumbers(this.SPRITE_KEY, { start: 0, end: 2 }),
+      frames: phaserScene.anims.generateFrameNumbers(this.SPRITE_KEY, { start: 0, end: 2 }),
       frameRate: 10,
       repeat: -1,
     });
 
-    scene.anims.create({
+    phaserScene.anims.create({
       key: "turn",
       frames: [{ key: this.SPRITE_KEY, frame: 3 }],
       frameRate: 20,
     });
 
-    scene.anims.create({
+    phaserScene.anims.create({
       key: "right",
-      frames: scene.anims.generateFrameNumbers(this.SPRITE_KEY, { start: 4, end: 6 }),
+      frames: phaserScene.anims.generateFrameNumbers(this.SPRITE_KEY, { start: 4, end: 6 }),
       frameRate: 10,
       repeat: -1,
     });
 
-    scene.cursors = scene.input.keyboard.createCursorKeys();
+    phaserScene.cursors = phaserScene.input.keyboard.createCursorKeys();
   }
 
-  cursorsHandler(scene) {
-    if (scene.cursors.left.isDown) {
-      scene.player.setVelocityX(-160);
-      scene.player.anims.play("left", true);
-      this.moveBackround(scene, 0);
-    } else if (scene.cursors.right.isDown) {
-      scene.player.setVelocityX(160);
-      scene.player.anims.play("right", true);
-      this.moveBackround(scene, 1);
+  cursorsHandler(phaserScene) {
+    if (phaserScene.cursors.left.isDown) {
+      phaserScene.player.setVelocityX(-160);
+      phaserScene.player.anims.play("left", true);
+    } else if (phaserScene.cursors.right.isDown) {
+      phaserScene.player.setVelocityX(160);
+      phaserScene.player.anims.play("right", true);
     } else {
-      scene.player.setVelocityX(0);
-      scene.player.anims.play("turn");
+      phaserScene.player.setVelocityX(0);
+      phaserScene.player.anims.play("turn");
     }
     // Jump
-    if ((scene.cursors.up.isDown || scene.cursors.space.isDown) && scene.player.body.onFloor()) {
-      scene.player.setVelocityY(-400);
+    if ((phaserScene.cursors.up.isDown || phaserScene.cursors.space.isDown) && phaserScene.player.body.onFloor()) {
+      phaserScene.player.setVelocityY(-260); // Gomba exakt 4 Tiles hochspringen
     }
-  }
-
-  moveBackround(scene, option) {
-    if (option === 0) {
-      scene.woodFar.tilePositionX -= 0.05;
-      scene.woodMid.tilePositionX -= 0.1;
-      scene.woodClose.tilePositionX -= 0.4;
-
-      // scene.platforms.children.entries.forEach((element) => {
-      //   element.x += 0.5;
-      // });
-    } else if (option === 1) {
-      scene.woodFar.tilePositionX += 0.05;
-      scene.woodMid.tilePositionX += 0.1;
-      scene.woodClose.tilePositionX += 0.4;
-
-      // scene.platforms.children.entries.forEach((element) => {
-      //   element.x -= 0.5;
-      // });
-    } else return;
   }
 }
 
