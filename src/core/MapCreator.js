@@ -7,6 +7,7 @@
  */
 class MapCreator {
   MAP_KEY = null;
+  NEW_MAP_KEY = null;
   MAP_LAYERS = null;
   FINISH = false;
   GAME_OVER = false;
@@ -100,15 +101,17 @@ class MapCreator {
    */
   static update(phaserScene, config = {}) {
     // Load config
-    const MAP_KEY = config.MAP_KEY || "Preload";
+    this.NEW_MAP_KEY = config.MAP_KEY || "Preload";
 
     if (this.FINISH) {
       console.log("Finish");
+      console.log(window.timer.time()); // Log Timer
       this.FINISH = false;
-      phaserScene.scene.start(MAP_KEY);
+      phaserScene.scene.start(this.NEW_MAP_KEY);
     }
     if (this.GAME_OVER) {
       console.log("Game Over");
+      console.log(window.timer.time()); // Log Timer
       this.GAME_OVER = false;
       phaserScene.scene.start("GameOver");
     }

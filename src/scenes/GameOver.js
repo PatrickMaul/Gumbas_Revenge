@@ -8,10 +8,11 @@ class GameOver extends Phaser.Scene {
   preload() {
     this.background = new Background(this); // Load background
     MapCreator.preload(this, { MAP_KEY: "Game_Over" });
-    console.log(this.background);
   }
 
   create() {
+    // Start timer
+    window.timer.start();
     this.background.create(this);
     MapCreator.loadLevel(this);
     this.GOOMBA = new Goomba(this); // Create goomba
@@ -21,7 +22,8 @@ class GameOver extends Phaser.Scene {
 
   update() {
     this.GOOMBA.cursorsHandler(this); // Goomba coursor handler
-    MapCreator.update(this, { MAP_KEY: "Preload" });
+    MapCreator.update(this, { MAP_KEY: "TestLevel" });
   }
 }
+
 export default GameOver;
