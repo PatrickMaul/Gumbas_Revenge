@@ -197,7 +197,7 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":11,
+ "nextlayerid":12,
  "nextobjectid":1,
  "orientation":"orthogonal",
  "renderorder":"right-down",
@@ -364,6 +364,11 @@
                  "id":154,
                  "properties":[
                         {
+                         "name":"collideUp",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
                          "name":"collides",
                          "type":"bool",
                          "value":true
@@ -373,6 +378,11 @@
                  "id":155,
                  "properties":[
                         {
+                         "name":"collideUp",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
                          "name":"collides",
                          "type":"bool",
                          "value":true
@@ -381,6 +391,11 @@
                 {
                  "id":156,
                  "properties":[
+                        {
+                         "name":"collideUp",
+                         "type":"bool",
+                         "value":true
+                        }, 
                         {
                          "name":"collides",
                          "type":"bool",

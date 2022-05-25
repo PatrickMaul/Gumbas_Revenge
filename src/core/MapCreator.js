@@ -63,6 +63,7 @@ class MapCreator {
     this.MAP_LAYERS.filter((layer) => layer.name.includes("LM_")).forEach((layer) => {
       phaserScene[layer.name].setCollisionByProperty({ collides: true });
     });
+
     // Iterate through layers, filtered by prefix "C_"
     this.MAP_LAYERS.filter((layer) => layer.name.includes("C_")).forEach((layer) => {
       if (layer.name.includes("Dead")) {
