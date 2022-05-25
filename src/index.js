@@ -11,7 +11,7 @@ class Game extends Phaser.Game {
     const config = {
       type: Phaser.AUTO,
       backgroundColor: "#162c38",
-      width: 4112, //4112
+      width: 4112, // 4112
       height: 448, // 448
       physics: {
         default: "arcade",

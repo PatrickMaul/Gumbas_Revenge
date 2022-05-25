@@ -109,7 +109,7 @@ class MapCreator {
     if (this.GAME_OVER) {
       console.log("Game Over");
       this.GAME_OVER = false;
-      phaserScene.scene.start("TestLevel");
+      phaserScene.scene.start("GameOver");
     }
   }
 }
