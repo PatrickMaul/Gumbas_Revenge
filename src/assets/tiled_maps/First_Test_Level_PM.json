@@ -196,9 +196,80 @@
          "width":257,
          "x":0,
          "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":15,
+         "name":"ENEMY",
+         "objects":[
+                {
+                 "gid":2046,
+                 "height":16,
+                 "id":13,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"enemyId",
+                         "type":"string",
+                         "value":"TOAD"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":213.333333333333,
+                 "y":348.666666666667
+                }, 
+                {
+                 "gid":2046,
+                 "height":16,
+                 "id":14,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"enemyId",
+                         "type":"string",
+                         "value":"TOAD"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":828,
+                 "y":337.333333333333
+                }, 
+                {
+                 "gid":2046,
+                 "height":16,
+                 "id":15,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"enemyId",
+                         "type":"string",
+                         "value":"TOAD"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":693.333333333333,
+                 "y":253.333333333333
+                }],
+         "opacity":1,
+         "properties":[
+                {
+                 "name":"id",
+                 "type":"string",
+                 "value":"TOAD"
+                }],
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
         }],
- "nextlayerid":12,
- "nextobjectid":1,
+ "nextlayerid":16,
+ "nextobjectid":17,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.8.5",

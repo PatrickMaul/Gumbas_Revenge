@@ -1,3 +1,5 @@
+import { spawnEnemies, handlePlatformEnemyCollision } from "./utils";
+
 /**
  * This class is loading evrything we need for our Level
  * - Loading levelmap
@@ -10,7 +12,6 @@ class MapCreator {
   NEW_MAP_KEY = null;
   MAP_LAYERS = null;
   FINISH = false;
-  GAME_OVER = false;
 
   /**
    * Loading needed data
@@ -44,7 +45,7 @@ class MapCreator {
     // Create the map layers and the background
     // ATENTION: You have to take care of the order
     this.MAP_LAYERS.forEach((layer) => {
-      phaserScene[layer.name] = phaserScene.levelMap.createLayer(layer.name, phaserScene.tileset);
+      phaserScene[layer.name] = phaserScene.levelMap.createLayer(layer.name, phaserScene.tileset, 0, 0);
     });
 
     // Invisible layers made invisible
@@ -59,31 +60,42 @@ class MapCreator {
    * @param {Scene} phaserScene The scene object.
    */
   static addPhysics(phaserScene) {
-    // Iterate through layers, filtered by prefix "LM_"
-    this.MAP_LAYERS.filter((layer) => layer.name.includes("LM_")).forEach((layer) => {
-      phaserScene[layer.name].setCollisionByProperty({ collides: true });
-    });
+    spawnEnemies(phaserScene)
 
-    // Iterate through layers, filtered by prefix "C_"
-    this.MAP_LAYERS.filter((layer) => layer.name.includes("C_")).forEach((layer) => {
-      if (layer.name.includes("Dead")) {
-        phaserScene.physics.add.collider(
-          phaserScene.player,
-          phaserScene[layer.name],
-          () => (this.GAME_OVER = true),
-          null,
-          this
-        );
-      } else if (layer.name.includes("Finish")) {
-        phaserScene.physics.add.collider(
-          phaserScene.player,
-          phaserScene[layer.name],
-          () => (this.FINISH = true),
-          null,
-          this
-        );
-      } else phaserScene.physics.add.collider(phaserScene.player, phaserScene[layer.name]);
-    });
+    for(let i = 0; i < this.MAP_LAYERS.length; i++) {
+      const layerName = this.MAP_LAYERS[i].name
+      const layer = phaserScene[this.MAP_LAYERS[i].name]
+
+      if(layerName.includes('LM_')) {
+        layer.setCollisionByProperty({ collides: true });
+      }
+
+      if(layerName.includes('C_')) {
+        if (layerName.includes("Dead")) {
+          phaserScene.physics.add.collider(
+            phaserScene.player,
+            layer,
+            () => (phaserScene.gameOver = true),
+            null,
+            this
+          );
+        } else if (layerName.includes("Finish")) {
+          phaserScene.physics.add.collider(
+            phaserScene.player,
+            layer,
+            () => (this.FINISH = true),
+            null,
+            this
+          );
+        } else {
+          phaserScene.physics.add.collider(phaserScene.player, layer);
+        }
+      }
+
+      phaserScene.physics.add.collider(layer, phaserScene.enemies, handlePlatformEnemyCollision.bind(phaserScene))
+    }
+    
+
   }
 
   /**
@@ -94,6 +106,7 @@ class MapCreator {
     // Camera settings
     phaserScene.cameras.main.startFollow(phaserScene.player, false, 0.1, 0.1, -750, +32);
     phaserScene.cameras.main.zoomTo(2);
+
   }
 
   /**
@@ -110,10 +123,10 @@ class MapCreator {
       this.FINISH = false;
       phaserScene.scene.start(this.NEW_MAP_KEY);
     }
-    if (this.GAME_OVER) {
+    if (phaserScene.gameOver) {
       console.log("Game Over");
       console.log(Timer.time()); // Log Timer
-      this.GAME_OVER = false;
+      phaserScene.gameOver = false;
       phaserScene.scene.start("GameOver");
     }
   }
