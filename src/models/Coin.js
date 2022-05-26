@@ -6,7 +6,7 @@ class Coin {
   AMOUNT = 100;
   SPRITE_KEY = "coin";
   SPRITE_PATH = "./src/assets/coin.png";
-  //
+  // Other
   sprite = null;
   counter = 0;
 
@@ -18,7 +18,9 @@ class Coin {
   }
 
   /**
-   * Creates the coins where they were placed on the Tiled-map.
+   * Creates coins. Coins are spawned where they are placed in the object layer.
+   *
+   * This function calls two other functions. (addPhysics and drawCounter)
    * @param {Phaser.Scene} phaserScene: Phaser 3 scene object
    */
   create(phaserScene) {
@@ -29,38 +31,23 @@ class Coin {
     const coins = phaserScene.levelMap.getObjectLayer("COIN");
 
     if (coins) {
-      coins.objects.forEach((coin) => {
-        let c = phaserScene.physics.add.sprite(coin.x, coin.y, "coin");
-        phaserScene.coins.children.entries.push(c);
+      coins.objects.forEach((coinData) => {
+        let coin = phaserScene.physics.add.sprite(coinData.x, coinData.y, "coin");
+
+        phaserScene.anims.create({
+          key: "rotation",
+          frames: phaserScene.anims.generateFrameNumbers("coin", { start: 0, end: 5 }),
+          frameRate: 6,
+          repeat: -1,
+        });
+        // Start animation
+        coin.anims.play("rotation", true);
+        phaserScene.coins.children.entries.push(coin);
       });
     }
 
     this.addPhysics(phaserScene);
-    this.addRotation(phaserScene);
-
     this.drawCounter(phaserScene);
-  }
-
-  /**
-   * Add the spritesheet animation.
-   *
-   * Iterate througth the coins array (phaserScene). Each coin get the animation 'rotation'. Animation autoplays.
-   * @param {Phaser.Scene} phaserScene: Phaser 3 scene object
-   */
-  addRotation(phaserScene) {
-    let coins = phaserScene.coins.children.getArray();
-
-    // Create animation
-    coins.forEach((child) => {
-      phaserScene.anims.create({
-        key: "rotation",
-        frames: phaserScene.anims.generateFrameNumbers("coin", { start: 0, end: 5 }),
-        frameRate: 6,
-        repeat: -1,
-      });
-      // Start animation
-      child.anims.play("rotation", true);
-    });
   }
 
   /**
