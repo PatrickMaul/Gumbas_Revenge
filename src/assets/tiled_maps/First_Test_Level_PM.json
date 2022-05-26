@@ -267,9 +267,77 @@
          "visible":true,
          "x":0,
          "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":16,
+         "name":"COIN",
+         "objects":[
+                {
+                 "height":0,
+                 "id":19,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"coinId",
+                         "type":"string",
+                         "value":"COIN"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":575.24837483135,
+                 "y":229.976695694836
+                }, 
+                {
+                 "height":0,
+                 "id":23,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"coinId",
+                         "type":"string",
+                         "value":"COIN"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":577.701459585429,
+                 "y":145.345271679137
+                }, 
+                {
+                 "height":0,
+                 "id":24,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"coinId",
+                         "type":"string",
+                         "value":"COIN"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":526.186679749785,
+                 "y":204.832576965534
+                }],
+         "opacity":1,
+         "properties":[
+                {
+                 "name":"id",
+                 "type":"string",
+                 "value":"COIN"
+                }],
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
         }],
- "nextlayerid":16,
- "nextobjectid":17,
+ "nextlayerid":17,
+ "nextobjectid":25,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.8.5",
