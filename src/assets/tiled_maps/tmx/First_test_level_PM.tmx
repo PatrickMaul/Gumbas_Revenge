@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.5" orientation="orthogonal" renderorder="right-down" width="257" height="28" tilewidth="16" tileheight="16" infinite="0" nextlayerid="16" nextobjectid="17">
+<map version="1.8" tiledversion="1.8.5" orientation="orthogonal" renderorder="right-down" width="257" height="28" tilewidth="16" tileheight="16" infinite="0" nextlayerid="17" nextobjectid="25">
  <editorsettings>
-  <export target="../First_test_level_PM.json" format="json"/>
+  <export target="../First_Test_Level_PM.json" format="json"/>
  </editorsettings>
  <tileset firstgid="1" name="SuperMarioWorld_TSM" tilewidth="16" tileheight="16" spacing="1" margin="1" tilecount="2352" columns="48">
   <image source="../SuperMarioWorld_TSM.png" width="817" height="845"/>
@@ -616,6 +616,26 @@
   <object id="15" gid="2046" x="693.333" y="253.333" width="16" height="16">
    <properties>
     <property name="enemyId" value="TOAD"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="16" name="COIN">
+  <properties>
+   <property name="id" value="COIN"/>
+  </properties>
+  <object id="19" x="575.248" y="229.977">
+   <properties>
+    <property name="coinId" value="COIN"/>
+   </properties>
+  </object>
+  <object id="23" x="577.701" y="145.345">
+   <properties>
+    <property name="coinId" value="COIN"/>
+   </properties>
+  </object>
+  <object id="24" x="526.187" y="204.833">
+   <properties>
+    <property name="coinId" value="COIN"/>
    </properties>
   </object>
  </objectgroup>

@@ -26,11 +26,16 @@ class Coin {
   create(phaserScene) {
     this.phaserScene = phaserScene;
 
-    phaserScene.coins = phaserScene.physics.add.group({
-      key: this.SPRITE_KEY,
-      repeat: this.AMOUNT,
-      setXY: { x: Math.floor(Math.random() * 1000), y: 0, stepX: Math.floor(Math.random() * 1000) },
-    });
+    phaserScene.coins = phaserScene.physics.add.group();
+
+    const coins = phaserScene.levelMap.getObjectLayer("COIN");
+
+    if (coins) {
+      coins.objects.forEach((coin) => {
+        let c = phaserScene.physics.add.sprite(coin.x, coin.y, "coin");
+        phaserScene.coins.children.entries.push(c);
+      });
+    }
 
     this.addPhysics(phaserScene);
     this.addRotation(phaserScene);
