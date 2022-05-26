@@ -8,6 +8,8 @@ export function spawnEnemies(scene) {
     if(enemies) {
         enemies.objects.forEach(enemy => {
             const id = enemy.properties.filter(prop => prop.name === 'enemyId')[0].value
+
+            // for each enemy id spawn enemy
             if(id === 'TOAD') {
                 new Toad(scene, {SPAWN_X: enemy.x, SPAWN_Y:enemy.y})
             }
