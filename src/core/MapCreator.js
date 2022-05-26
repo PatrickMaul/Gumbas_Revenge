@@ -45,7 +45,7 @@ class MapCreator {
     // Create the map layers and the background
     // ATENTION: You have to take care of the order
     this.MAP_LAYERS.forEach((layer) => {
-      phaserScene[layer.name] = phaserScene.levelMap.createStaticLayer(layer.name, phaserScene.tileset, 0, 0);
+      phaserScene[layer.name] = phaserScene.levelMap.createLayer(layer.name, phaserScene.tileset, 0, 0);
     });
 
     // Invisible layers made invisible
