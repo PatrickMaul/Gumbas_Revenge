@@ -39,13 +39,16 @@ function handlePlayerCollision(player, enemy) {
         enemy.destroy()
     }
     else if(enemy.body.touching.right) {
-        console.log('enemy hit')
+        console.log('toad is better than you noob')
+        this.gameOver = true
     }
     else if(enemy.body.touching.left) {
-        console.log('enemy hit')
+        console.log('toad is better than you noob')
+        this.gameOver = true
     }
     else if(enemy.body.touching.down) {
-        console.log('enemy hit')
+        console.log('toad is better than you noob')
+        this.gameOver = true
     }
 }
 

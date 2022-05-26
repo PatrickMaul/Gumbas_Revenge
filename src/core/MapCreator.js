@@ -12,7 +12,6 @@ class MapCreator {
   NEW_MAP_KEY = null;
   MAP_LAYERS = null;
   FINISH = false;
-  GAME_OVER = false;
 
   /**
    * Loading needed data
@@ -76,7 +75,7 @@ class MapCreator {
           phaserScene.physics.add.collider(
             phaserScene.player,
             layer,
-            () => (this.GAME_OVER = true),
+            () => (phaserScene.gameOver = true),
             null,
             this
           );
@@ -124,10 +123,10 @@ class MapCreator {
       this.FINISH = false;
       phaserScene.scene.start(this.NEW_MAP_KEY);
     }
-    if (this.GAME_OVER) {
+    if (phaserScene.gameOver) {
       console.log("Game Over");
       console.log(Timer.time()); // Log Timer
-      this.GAME_OVER = false;
+      phaserScene.gameOver = false;
       phaserScene.scene.start("GameOver");
     }
   }
