@@ -18,9 +18,7 @@ class Coin {
   }
 
   /**
-   * Add the spritesheet animation.
-   *
-   * Iterate througth the coins array (phaserScene). Each coin get the animation 'rotation'. Animation autoplays.
+   * Creates the coins where they were placed on the Tiled-map.
    * @param {Phaser.Scene} phaserScene: Phaser 3 scene object
    */
   create(phaserScene) {
@@ -88,21 +86,22 @@ class Coin {
   }
 
   /**
+   * Defines the coin behavior when touching th player
    *
-   * @param {*} player
-   * @param {*} coin
-   * @param {*} _class
+   * @param {AcardeSprite} player: Player => Event
+   * @param {AcardeSprite} coin: Coin => Event
+   * @param {Coin} _class: this
    */
   collectCoin(player, coin, _class) {
     coin.disableBody(true, true);
+    console.log(player);
     _class.counter++;
     player.scene.COIN_COUNTER.text = _class.counter;
   }
 
   /**
-   * Add the spritesheet animation.
+   * Draws the counter.
    *
-   * Iterate througth the coins array (phaserScene). Each coin get the animation 'rotation'. Animation autoplays.
    * @param {Phaser.Scene} phaserScene: Phaser 3 scene object
    */
   drawCounter(phaserScene) {
