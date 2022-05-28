@@ -35,8 +35,4 @@ export default class ScoreBoard extends Phaser.Scene {
       this.scene.start(this.newMapKey);
     }, 10000);
   }
-
-  update() {
-    //
-  }
 }
