@@ -6,9 +6,8 @@ class Coin {
   AMOUNT = 100;
   SPRITE_KEY = "coin";
   SPRITE_PATH = "./src/assets/coin.png";
-  //
+  // Other
   sprite = null;
-  counter = 0;
 
   constructor(config = {}) {
     // Load config
@@ -18,9 +17,9 @@ class Coin {
   }
 
   /**
-   * Add the spritesheet animation.
+   * Creates coins. Coins are spawned where they are placed in the object layer.
    *
-   * Iterate througth the coins array (phaserScene). Each coin get the animation 'rotation'. Animation autoplays.
+   * This function calls two other functions. (addPhysics and drawCounter)
    * @param {Phaser.Scene} phaserScene: Phaser 3 scene object
    */
   create(phaserScene) {
@@ -31,38 +30,23 @@ class Coin {
     const coins = phaserScene.levelMap.getObjectLayer("COIN");
 
     if (coins) {
-      coins.objects.forEach((coin) => {
-        let c = phaserScene.physics.add.sprite(coin.x, coin.y, "coin");
-        phaserScene.coins.children.entries.push(c);
+      coins.objects.forEach((coinData) => {
+        let coin = phaserScene.physics.add.sprite(coinData.x, coinData.y, "coin");
+
+        phaserScene.anims.create({
+          key: "rotation",
+          frames: phaserScene.anims.generateFrameNumbers("coin", { start: 0, end: 5 }),
+          frameRate: 6,
+          repeat: -1,
+        });
+        // Start animation
+        coin.anims.play("rotation", true);
+        phaserScene.coins.children.entries.push(coin);
       });
     }
 
     this.addPhysics(phaserScene);
-    this.addRotation(phaserScene);
-
-    this.drawCounter(phaserScene);
-  }
-
-  /**
-   * Add the spritesheet animation.
-   *
-   * Iterate througth the coins array (phaserScene). Each coin get the animation 'rotation'. Animation autoplays.
-   * @param {Phaser.Scene} phaserScene: Phaser 3 scene object
-   */
-  addRotation(phaserScene) {
-    let coins = phaserScene.coins.children.getArray();
-
-    // Create animation
-    coins.forEach((child) => {
-      phaserScene.anims.create({
-        key: "rotation",
-        frames: phaserScene.anims.generateFrameNumbers("coin", { start: 0, end: 5 }),
-        frameRate: 6,
-        repeat: -1,
-      });
-      // Start animation
-      child.anims.play("rotation", true);
-    });
+    if (!phaserScene.coinCounter || phaserScene.coinCounter > 0) phaserScene.coinCounter = 0;
   }
 
   /**
@@ -88,33 +72,15 @@ class Coin {
   }
 
   /**
+   * Defines the coin behavior when touching th player
    *
-   * @param {*} player
-   * @param {*} coin
-   * @param {*} _class
+   * @param {AcardeSprite} player: Player => Event
+   * @param {AcardeSprite} coin: Coin => Event
+   * @param {Coin} _class: this
    */
   collectCoin(player, coin, _class) {
     coin.disableBody(true, true);
-    _class.counter++;
-    player.scene.COIN_COUNTER.text = _class.counter;
-  }
-
-  /**
-   * Add the spritesheet animation.
-   *
-   * Iterate througth the coins array (phaserScene). Each coin get the animation 'rotation'. Animation autoplays.
-   * @param {Phaser.Scene} phaserScene: Phaser 3 scene object
-   */
-  drawCounter(phaserScene) {
-    phaserScene.COIN_COUNTER = phaserScene.make.text({
-      x: 270,
-      y: 150,
-      text: `${this.counter}`,
-      style: {
-        font: "48px monospace",
-        fill: "#ffffff",
-      },
-    });
+    player.scene.coinCounter++;
   }
 }
 
