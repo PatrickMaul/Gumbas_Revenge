@@ -1,4 +1,5 @@
 import { spawnEnemies, handlePlatformEnemyCollision } from "./utils";
+import Coin from "../models/Coin";
 
 /**
  * This class is loading evrything we need for our Level
@@ -60,18 +61,19 @@ class MapCreator {
    * @param {Scene} phaserScene The scene object.
    */
   static addPhysics(phaserScene) {
-    spawnEnemies(phaserScene)
+    spawnEnemies(phaserScene);
 
-    for(let i = 0; i < this.MAP_LAYERS.length; i++) {
-      const layerName = this.MAP_LAYERS[i].name
-      const layer = phaserScene[this.MAP_LAYERS[i].name]
+    for (let i = 0; i < this.MAP_LAYERS.length; i++) {
+      const layerName = this.MAP_LAYERS[i].name;
+      const layer = phaserScene[this.MAP_LAYERS[i].name];
 
-      if(layerName.includes('LM_')) {
+      if (layerName.includes("LM_")) {
         layer.setCollisionByProperty({ collides: true });
       }
 
-      if(layerName.includes('C_')) {
+      if (layerName.includes("C_")) {
         if (layerName.includes("Dead")) {
+
           phaserScene.physics.add.collider(
             phaserScene.player,
             layer,
@@ -133,10 +135,13 @@ class MapCreator {
         }
       }
 
-      phaserScene.physics.add.collider(layer, phaserScene.enemies, handlePlatformEnemyCollision.bind(phaserScene))
+      phaserScene.physics.add.collider(layer, phaserScene.enemies, handlePlatformEnemyCollision.bind(phaserScene));
     }
-    
+  }
 
+  static loadObjects(phaserScene) {
+    phaserScene.coinManager = new Coin();
+    phaserScene.coinManager = phaserScene.coinManager.create(phaserScene);
   }
 
   /**
@@ -147,7 +152,6 @@ class MapCreator {
     // Camera settings
     phaserScene.cameras.main.startFollow(phaserScene.player, false, 0.1, 0.1, -750, +32);
     phaserScene.cameras.main.zoomTo(2);
-
   }
 
   /**
@@ -162,7 +166,7 @@ class MapCreator {
       console.log("Finish");
       console.log(Timer.time()); // Log Timer
       this.FINISH = false;
-      phaserScene.scene.start(this.NEW_MAP_KEY);
+      phaserScene.scene.start("ScoreBoard", { newMapKey: this.NEW_MAP_KEY, coinCounter: phaserScene.coinCounter });
     }
     if (phaserScene.gameOver) {
       console.log("Game Over");
