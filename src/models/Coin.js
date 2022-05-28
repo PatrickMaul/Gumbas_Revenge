@@ -8,7 +8,6 @@ class Coin {
   SPRITE_PATH = "./src/assets/coin.png";
   // Other
   sprite = null;
-  counter = 0;
 
   constructor(config = {}) {
     // Load config
@@ -47,7 +46,7 @@ class Coin {
     }
 
     this.addPhysics(phaserScene);
-    this.drawCounter(phaserScene);
+    if (!phaserScene.coinCounter || phaserScene.coinCounter > 0) phaserScene.coinCounter = 0;
   }
 
   /**
@@ -81,26 +80,7 @@ class Coin {
    */
   collectCoin(player, coin, _class) {
     coin.disableBody(true, true);
-    console.log(player);
-    _class.counter++;
-    player.scene.COIN_COUNTER.text = _class.counter;
-  }
-
-  /**
-   * Draws the counter.
-   *
-   * @param {Phaser.Scene} phaserScene: Phaser 3 scene object
-   */
-  drawCounter(phaserScene) {
-    phaserScene.COIN_COUNTER = phaserScene.make.text({
-      x: 270,
-      y: 150,
-      text: `${this.counter}`,
-      style: {
-        font: "48px monospace",
-        fill: "#ffffff",
-      },
-    });
+    player.scene.coinCounter++;
   }
 }
 

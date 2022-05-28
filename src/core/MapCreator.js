@@ -112,7 +112,7 @@ class MapCreator {
       console.log("Finish");
       console.log(Timer.time()); // Log Timer
       this.FINISH = false;
-      phaserScene.scene.start(this.NEW_MAP_KEY);
+      phaserScene.scene.start("ScoreBoard", { newMapKey: this.NEW_MAP_KEY, coinCounter: phaserScene.coinCounter });
     }
     if (phaserScene.gameOver) {
       console.log("Game Over");
