@@ -1,8 +1,13 @@
 import Background from "../core/Background";
 
 export default class ScoreBoard extends Phaser.Scene {
-  // GOOMBA = null;
-
+  /**
+   * Loading passed scene data.
+   *
+   * MapCreator calls `scene.start('ScoreBoard',{key: value [, key: value, ...]})`
+   *
+   * @param {Object} data
+   */
   init(data) {
     this.coinCounter = data.coinCounter;
     this.newMapKey = data.newMapKey;
@@ -24,6 +29,7 @@ export default class ScoreBoard extends Phaser.Scene {
         fill: "#ffffff",
       },
     });
+    coinCounterText.setOrigin(0.5, 0.5);
 
     setTimeout(() => {
       this.scene.start(this.newMapKey);
