@@ -8,6 +8,7 @@ class Coin {
   SPRITE_PATH = "./src/assets/coin.png";
   // Other
   sprite = null;
+  counter = 0;
 
   constructor(config = {}) {
     // Load config
@@ -80,7 +81,7 @@ class Coin {
    */
   collectCoin(player, coin, _class) {
     coin.disableBody(true, true);
-    player.scene.coinCounter++;
+    _class.counter++;
   }
 }
 
