@@ -63,10 +63,10 @@ class Goomba {
 
   cursorsHandler(phaserScene) {
     if (phaserScene.cursors.left.isDown) {
-      phaserScene.player.setVelocityX(-160);
+      phaserScene.player.setVelocityX(-170);
       phaserScene.player.anims.play("left", true);
     } else if (phaserScene.cursors.right.isDown) {
-      phaserScene.player.setVelocityX(460);
+      phaserScene.player.setVelocityX(170);
       phaserScene.player.anims.play("right", true);
     } else {
       phaserScene.player.setVelocityX(0);
