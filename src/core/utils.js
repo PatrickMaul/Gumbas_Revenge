@@ -1,5 +1,5 @@
 import Toad from "../models/Toad";
-import Mario from "../models/Toad";
+import Mario from "../models/Mario";
 
 export function spawnEnemies(scene) {
   scene.enemies = scene.physics.add.group();
