@@ -20,7 +20,7 @@ class GameOver extends Phaser.Scene {
     MapCreator.createCamera(this);
 
     const gameOverText = this.make.text({
-      x: 600,
+      x: 500,
       y: 200,
       text: "Game Over",
       style: {
@@ -31,7 +31,7 @@ class GameOver extends Phaser.Scene {
     gameOverText.setOrigin(0.5, 0.5);
 
     const restartText = this.make.text({
-      x: 740,
+      x: 440,
       y: 248,
       text: "Go to menu",
       style: {
