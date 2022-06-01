@@ -31,8 +31,8 @@ class GameOver extends Phaser.Scene {
     gameOverText.setOrigin(0.5, 0.5);
 
     const restartText = this.make.text({
-      x: 440,
-      y: 248,
+      x: 660,
+      y: 232,
       text: "Go to menu",
       style: {
         font: "12px monospace",
