@@ -4,6 +4,8 @@ import Preload from "./scenes/Preload";
 import Menu from "./scenes/menu";
 import TestLevel from "./scenes/levels/test";
 import Level_1 from "./scenes/levels/Level_1";
+import Level_2 from "./scenes/levels/Level_2";
+import Level_3 from "./scenes/levels/Level_3";
 import Timer from "./core/Timer";
 import GameOver from "./scenes/GameOver";
 
@@ -32,6 +34,8 @@ class Game extends Phaser.Game {
 
     // Levels
     this.scene.add("Level_1", Level_1, false);
+    this.scene.add("Level_2", Level_2, false);
+    this.scene.add("Level_3", Level_3, false);
 
     // Start
     this.scene.start("Preload");

@@ -2,5 +2,5 @@
 
 export default {
   // directly load test level after preload
-  loadTestLevel: true,
+  loadTestLevel: false,
 };

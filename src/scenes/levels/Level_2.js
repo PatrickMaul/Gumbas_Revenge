@@ -21,7 +21,7 @@ class TestLevel extends Phaser.Scene {
 
   update() {
     this.GOOMBA.cursorsHandler(this); // Goomba coursor handler
-    MapCreator.update(this, { MAP_KEY: "Level_2" });
+    MapCreator.update(this, { MAP_KEY: "Level_3" });
   }
 }
 export default TestLevel;
