@@ -76,6 +76,9 @@ class Goomba {
     if ((phaserScene.cursors.up.isDown || phaserScene.cursors.space.isDown) && phaserScene.player.body.onFloor()) {
       phaserScene.player.setVelocityY(-260); // Gomba exakt 4 Tiles hochspringen
     }
+    if ((phaserScene.cursors.up.isDown ) && phaserScene.player.body.onFloor()) {
+      phaserScene.player.setVelocityY(-220); // Gomba exakt 3 Tiles hochspringen
+    }
   }
 }
 
