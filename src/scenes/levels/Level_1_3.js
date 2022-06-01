@@ -11,6 +11,7 @@ export default class Level_1_3 extends Phaser.Scene {
   }
 
   create() {
+    Timer.start();
     this.background.create(this);
     MapCreator.loadLevel(this);
     this.GOOMBA = new Goomba(this, { SPAWN_X: 350 }); // Create goomba

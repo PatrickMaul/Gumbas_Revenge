@@ -4,3 +4,10 @@
   box-sizing: border-box;
   overflow: hidden;
 }
+
+#game-timer {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  color: white;
+}
