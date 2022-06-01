@@ -180,9 +180,17 @@ class MapCreator {
     this.NEW_MAP_KEY = config.MAP_KEY || "Preload";
 
     if (this.FINISH) {
+
+      if(this.NEW_MAP_KEY === 'Level_1') localStorage.setItem('tutorialPlayed', 'true')
+
       console.log("Finish");
       console.log(Timer.time()); // Log Timer
       this.FINISH = false;
+
+      if(this.NEW_MAP_KEY === 'Tutorial' && localStorage.getItem('tutorialPlayed') === 'true') {
+        return phaserScene.scene.start('Level_1')
+      }
+
       phaserScene.scene.start(this.NEW_MAP_KEY);
     }
     if (phaserScene.gameOver) {
