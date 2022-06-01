@@ -2,12 +2,12 @@ import MapCreator from "../../core/MapCreator";
 import Background from "../../core/Background";
 import Goomba from "../../models/Goomba";
 
-class Level_3 extends Phaser.Scene {
+class Level_1_2 extends Phaser.Scene {
   GOOMBA = null;
 
   preload() {
     this.background = new Background(this); // Load background
-    MapCreator.preload(this, { MAP_KEY: "Level_3_Map" });
+    MapCreator.preload(this, { MAP_KEY: "Level_1_2_Map" });
   }
 
   create() {
@@ -21,7 +21,7 @@ class Level_3 extends Phaser.Scene {
 
   update() {
     this.GOOMBA.cursorsHandler(this); // Goomba coursor handler
-    MapCreator.update(this, { MAP_KEY: "GameOver" });
+    MapCreator.update(this, { MAP_KEY: "Level_1_3" });
   }
 }
-export default Level_3;
+export default Level_1_2;
