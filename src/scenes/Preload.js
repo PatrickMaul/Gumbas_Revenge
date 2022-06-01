@@ -24,6 +24,7 @@ class Preload extends Phaser.Scene {
     this.load.image("tilesheet", "./src/assets/tiled_maps/SuperMarioWorld_TSM.png", 16, 16); // Map tilesheet
     // TODO replace with spritesheet
     this.load.image("toad", "./src/assets/toad.png"); // Map tilesheet
+    this.load.image("mario", "./src/assets/mario.png"); // Map tilesheet
   }
 
   initProgressBar() {
