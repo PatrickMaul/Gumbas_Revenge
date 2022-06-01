@@ -1,7 +1,6 @@
 import MapCreator from "../../core/MapCreator";
 import Background from "../../core/Background";
 import Goomba from "../../models/Goomba";
-import Coin from "../../models/Coin";
 
 // TODO delete file after project finished:
 // /scenes/levels/test.js
@@ -23,9 +22,6 @@ class TestLevel extends Phaser.Scene {
     MapCreator.loadObjects(this);
     MapCreator.addPhysics(this);
     MapCreator.createCamera(this);
-
-    this.coinManager = new Coin();
-    this.coinManager = this.coinManager.create(this);
   }
 
   update() {
