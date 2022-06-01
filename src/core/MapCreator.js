@@ -73,23 +73,27 @@ class MapCreator {
 
       if (layerName.includes("C_")) {
         if (layerName.includes("Dead")) {
-
           phaserScene.physics.add.collider(
             phaserScene.player,
             layer,
             () => (phaserScene.gameOver = true),
-            (goomba,tile) => {
-              if(tile.index != -1 && phaserScene.tileset.tileProperties !== undefined && phaserScene.tileset.tileProperties[tile.index -1] !== undefined) // does not check the collision at every moment...
-              {  // setCollision(left [, right] [, up] [, down])  --> set the tileproperty of FaceLeft,FaceRight...                       
-                let propertyArray = phaserScene.tileset.tileProperties[tile.index -1]             
+            (goomba, tile) => {
+              if (
+                tile.index != -1 &&
+                phaserScene.tileset.tileProperties !== undefined &&
+                phaserScene.tileset.tileProperties[tile.index - 1] !== undefined
+              ) {
+                // does not check the collision at every moment...
+                // setCollision(left [, right] [, up] [, down])  --> set the tileproperty of FaceLeft,FaceRight...
+                let propertyArray = phaserScene.tileset.tileProperties[tile.index - 1];
                 tile.setCollision(
-                  propertyArray.collideLeft === undefined ? true: propertyArray.collideLeft,
-                  propertyArray.collideRight === undefined ? true: propertyArray.collideRight,
-                  propertyArray.collideUp === undefined ? true: propertyArray.collideUp,
-                  propertyArray.collideDown === undefined ? true: propertyArray.collideDown,
-                  )
-              }         
-              return true
+                  propertyArray.collideLeft === undefined ? true : propertyArray.collideLeft,
+                  propertyArray.collideRight === undefined ? true : propertyArray.collideRight,
+                  propertyArray.collideUp === undefined ? true : propertyArray.collideUp,
+                  propertyArray.collideDown === undefined ? true : propertyArray.collideDown
+                );
+              }
+              return true;
             },
             this
           );
@@ -98,40 +102,53 @@ class MapCreator {
             phaserScene.player,
             layer,
             () => (this.FINISH = true),
-            (goomba,tile) => {
-              if(tile.index != -1 && phaserScene.tileset.tileProperties !== undefined && phaserScene.tileset.tileProperties[tile.index -1] !== undefined) // does not check the collision at every moment...
-              {  // setCollision(left [, right] [, up] [, down])  --> set the tileproperty of FaceLeft,FaceRight...                       
-                let propertyArray = phaserScene.tileset.tileProperties[tile.index -1]             
+            (goomba, tile) => {
+              if (
+                tile.index != -1 &&
+                phaserScene.tileset.tileProperties !== undefined &&
+                phaserScene.tileset.tileProperties[tile.index - 1] !== undefined
+              ) {
+                // does not check the collision at every moment...
+                // setCollision(left [, right] [, up] [, down])  --> set the tileproperty of FaceLeft,FaceRight...
+                let propertyArray = phaserScene.tileset.tileProperties[tile.index - 1];
                 tile.setCollision(
-                  propertyArray.collideLeft === undefined ? true: propertyArray.collideLeft,
-                  propertyArray.collideRight === undefined ? true: propertyArray.collideRight,
-                  propertyArray.collideUp === undefined ? true: propertyArray.collideUp,
-                  propertyArray.collideDown === undefined ? true: propertyArray.collideDown,
-                  )
-              }         
-              return true
+                  propertyArray.collideLeft === undefined ? true : propertyArray.collideLeft,
+                  propertyArray.collideRight === undefined ? true : propertyArray.collideRight,
+                  propertyArray.collideUp === undefined ? true : propertyArray.collideUp,
+                  propertyArray.collideDown === undefined ? true : propertyArray.collideDown
+                );
+              }
+              return true;
             },
             this
           );
         } else {
-          phaserScene.physics.add.collider(phaserScene.player, layer,
-          () => {
-            return true
-          },
-          (goomba,tile) => {
-            if(tile.index != -1 && phaserScene.tileset.tileProperties !== undefined && phaserScene.tileset.tileProperties[tile.index -1] !== undefined) // does not check the collision at every moment...
-            {  // setCollision(left [, right] [, up] [, down])  --> set the tileproperty of FaceLeft,FaceRight...                       
-              let propertyArray = phaserScene.tileset.tileProperties[tile.index -1]             
-              tile.setCollision(
-                propertyArray.collideLeft === undefined ? true: propertyArray.collideLeft,
-                propertyArray.collideRight === undefined ? true: propertyArray.collideRight,
-                propertyArray.collideUp === undefined ? true: propertyArray.collideUp,
-                propertyArray.collideDown === undefined ? true: propertyArray.collideDown,
-                )
-            }         
-            return true
-          },
-          this);
+          phaserScene.physics.add.collider(
+            phaserScene.player,
+            layer,
+            () => {
+              return true;
+            },
+            (goomba, tile) => {
+              if (
+                tile.index != -1 &&
+                phaserScene.tileset.tileProperties !== undefined &&
+                phaserScene.tileset.tileProperties[tile.index - 1] !== undefined
+              ) {
+                // does not check the collision at every moment...
+                // setCollision(left [, right] [, up] [, down])  --> set the tileproperty of FaceLeft,FaceRight...
+                let propertyArray = phaserScene.tileset.tileProperties[tile.index - 1];
+                tile.setCollision(
+                  propertyArray.collideLeft === undefined ? true : propertyArray.collideLeft,
+                  propertyArray.collideRight === undefined ? true : propertyArray.collideRight,
+                  propertyArray.collideUp === undefined ? true : propertyArray.collideUp,
+                  propertyArray.collideDown === undefined ? true : propertyArray.collideDown
+                );
+              }
+              return true;
+            },
+            this
+          );
         }
       }
 
@@ -166,7 +183,7 @@ class MapCreator {
       console.log("Finish");
       console.log(Timer.time()); // Log Timer
       this.FINISH = false;
-      phaserScene.scene.start("ScoreBoard", { newMapKey: this.NEW_MAP_KEY, coinCounter: phaserScene.coinCounter });
+      phaserScene.scene.start(this.NEW_MAP_KEY);
     }
     if (phaserScene.gameOver) {
       console.log("Game Over");

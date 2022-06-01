@@ -44,7 +44,7 @@ class Menu extends Phaser.Scene {
 
   update() {
     this.GOOMBA.cursorsHandler(this); // Goomba coursor handler
-    MapCreator.update(this, { MAP_KEY: "TestLevel" });
+    MapCreator.update(this, { MAP_KEY: "Level_1" });
   }
 }
 

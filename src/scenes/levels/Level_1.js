@@ -1,21 +1,15 @@
 import MapCreator from "../../core/MapCreator";
 import Background from "../../core/Background";
 import Goomba from "../../models/Goomba";
-import Coin from "../../models/Coin";
 
-// TODO delete file after project finished:
-// /scenes/levels/test.js
-// config.js                    loadTestLevel
-// /scenes/Preload.js           loadTestLevel
-// /assets/test-tile.png
-// index.js                     TestLevel
 class TestLevel extends Phaser.Scene {
   GOOMBA = null;
 
   preload() {
     this.background = new Background(this); // Load background
-    MapCreator.preload(this, { MAP_KEY: "First_Test_Level_PM" });
+    MapCreator.preload(this, { MAP_KEY: "PM_02" });
   }
+
   create() {
     this.background.create(this);
     MapCreator.loadLevel(this);
@@ -23,9 +17,6 @@ class TestLevel extends Phaser.Scene {
     MapCreator.loadObjects(this);
     MapCreator.addPhysics(this);
     MapCreator.createCamera(this);
-
-    this.coinManager = new Coin();
-    this.coinManager = this.coinManager.create(this);
   }
 
   update() {
@@ -33,5 +24,4 @@ class TestLevel extends Phaser.Scene {
     MapCreator.update(this, { MAP_KEY: "TestLevel" });
   }
 }
-
 export default TestLevel;

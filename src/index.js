@@ -3,9 +3,9 @@ import "phaser";
 import Preload from "./scenes/Preload";
 import Menu from "./scenes/menu";
 import TestLevel from "./scenes/levels/test";
+import Level_1 from "./scenes/levels/Level_1";
 import Timer from "./core/Timer";
 import GameOver from "./scenes/GameOver";
-import ScoreBoard from "./scenes/ScoreBoard";
 
 window.Timer = Timer;
 class Game extends Phaser.Game {
@@ -29,7 +29,11 @@ class Game extends Phaser.Game {
     this.scene.add("Menu", Menu, false);
     this.scene.add("TestLevel", TestLevel, false);
     this.scene.add("GameOver", GameOver, false);
-    this.scene.add("ScoreBoard", ScoreBoard, false);
+
+    // Levels
+    this.scene.add("Level_1", Level_1, false);
+
+    // Start
     this.scene.start("Preload");
   }
 }
