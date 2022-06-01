@@ -20,6 +20,7 @@ class TestLevel extends Phaser.Scene {
   }
 
   update() {
+    this.background.parallaxEffect(this);
     this.GOOMBA.cursorsHandler(this); // Goomba coursor handler
     MapCreator.update(this, { MAP_KEY: "Level_3" });
   }
