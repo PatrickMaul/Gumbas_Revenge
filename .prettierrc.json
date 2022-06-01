@@ -4,6 +4,7 @@
   "bracketSameLine": true,
   "bracketSpacing": true,
   "embeddedLanguageFormatting": "auto",
+  "endOfLine": "lf",
   "jsxSingleQuote": false,
   "semi": true,
   "singleAttributePerLine": false,
