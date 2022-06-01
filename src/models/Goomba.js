@@ -1,21 +1,12 @@
 class Goomba {
-  spawnX = null;
-  spawnY = null;
-  spriteKey = "goomba";
-  bounce = 0.2;
-  collideWithWorldBorders = true;
-  scale = 0.5;
-
-  constructor(phaserScene, config = {}) {
+  constructor(config = {}) {
+    // load config
     this.spawnX = config.spawnX || 250;
     this.spawnY = config.spawnY || 300;
-    this.spriteKey = config.spriteKey || this.spriteKey;
-    this.bounce = config.bounce || this.bounce;
-    this.collideWithWorldBorders = config.collideWithWorldBorders || this.collideWithWorldBorders;
-    this.scale = config.scale || this.scale;
-
-    // Create Goomba
-    this.create(phaserScene);
+    this.spriteKey = config.spriteKey || "goomba";
+    this.bounce = config.bounce || 0.2;
+    this.collideWithWorldBorders = config.collideWithWorldBorders || true;
+    this.scale = config.scale || 0.5;
   }
 
   create(phaserScene) {

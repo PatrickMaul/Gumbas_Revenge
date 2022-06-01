@@ -3,17 +3,17 @@ import Background from "../../core/Background";
 import Goomba from "../../models/Goomba";
 
 class Level_1_1 extends Phaser.Scene {
-  goomba = null;
-
   preload() {
     this.background = new Background(this);
+    this.goomba = new Goomba({ spawnX: 350 });
+
     MapCreator.preload(this, { MAP_KEY: "Level_1_1_Map" });
   }
 
   create() {
     this.background.create(this);
     MapCreator.loadLevel(this);
-    this.goomba = new Goomba(this, { spawnX: 350 });
+    this.goomba.create(this);
     MapCreator.loadObjects(this);
     MapCreator.addPhysics(this);
     MapCreator.createCamera(this);

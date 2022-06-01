@@ -3,8 +3,6 @@ import Background from "../../core/Background";
 import Goomba from "../../models/Goomba";
 
 export default class TestLevel extends Phaser.Scene {
-  goomba = null;
-
   preload() {
     this.background = new Background(this);
     MapCreator.preload(this, { MAP_KEY: "Level_1_1_Map" }); // Loading level map

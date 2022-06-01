@@ -3,10 +3,10 @@ import Background from "../core/Background";
 import Goomba from "../models/Goomba";
 
 class GameOver extends Phaser.Scene {
-  goomba = null;
-
   preload() {
     this.background = new Background(this);
+    this.goomba = new Goomba();
+
     MapCreator.preload(this, { MAP_KEY: "Game_Over" });
   }
 
@@ -14,7 +14,7 @@ class GameOver extends Phaser.Scene {
     Timer.start();
     this.background.create(this);
     MapCreator.loadLevel(this);
-    this.goomba = new Goomba(this);
+    this.goomba.create(this);
     MapCreator.addPhysics(this);
     MapCreator.createCamera(this);
 
