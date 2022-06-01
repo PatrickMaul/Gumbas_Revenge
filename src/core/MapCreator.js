@@ -193,10 +193,17 @@ class MapCreator {
       phaserScene.scene.start(this.NEW_MAP_KEY);
     }
     if (phaserScene.gameOver) {
+      const deathCounter = localStorage.getItem('Deaths')
+      if(deathCounter) {
+        localStorage.setItem('Deaths', parseInt(deathCounter) + 1)
+      } 
+
       console.log("Game Over");
       console.log(Timer.time()); // Log Timer
       phaserScene.gameOver = false;
       phaserScene.scene.start("GameOver");
+
+      window.updateDeathCounter()
     }
   }
 }

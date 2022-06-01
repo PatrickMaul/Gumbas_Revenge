@@ -25,6 +25,34 @@ class Preload extends Phaser.Scene {
     // TODO replace with spritesheet
     this.load.image("toad", "./src/assets/toad.png"); // Map tilesheet
     this.load.image("mario", "./src/assets/mario.png"); // Map tilesheet
+
+    if(!localStorage.getItem('Deaths')) localStorage.setItem('Deaths', 0)
+    if(!localStorage.getItem('Coins')) localStorage.setItem('Coins', 0)
+
+    // TODO cleanup
+
+    // death counter element
+    const el = document.createElement('div')
+    el.id = 'death-counter'
+    el.style.fontWeight = 'bold'
+    document.body.appendChild(el)
+
+    // coin counter element
+    const elCoin = document.createElement('div')
+    elCoin.id = 'coin-counter'
+    elCoin.style.fontWeight = 'bold'
+    document.body.appendChild(elCoin)
+
+    window.updateDeathCounter = () => {
+      document.getElementById('death-counter').innerHTML = `${localStorage.getItem('Deaths') || 0} Deaths`
+    }
+
+    window.updateCoinCounter = () => {
+      document.getElementById('coin-counter').innerHTML = `${localStorage.getItem('Coins') || 0} Coins`
+    }
+
+    window.updateDeathCounter()
+    window.updateCoinCounter()
   }
 
   initProgressBar() {

@@ -82,6 +82,13 @@ class Coin {
   collectCoin(player, coin, _class) {
     coin.disableBody(true, true);
     _class.counter++;
+
+    const coinCounter = localStorage.getItem('Coins')
+    if(coinCounter) {
+      localStorage.setItem('Coins', parseInt(coinCounter) + 1)
+    } 
+
+    window.updateCoinCounter()
   }
 }
 
