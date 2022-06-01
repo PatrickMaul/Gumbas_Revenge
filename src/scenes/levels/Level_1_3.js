@@ -13,7 +13,7 @@ class Level_1_3 extends Phaser.Scene {
   create() {
     this.background.create(this);
     MapCreator.loadLevel(this);
-    this.GOOMBA = new Goomba(this, { SPAWN_X: 350 }); // Create goomba
+    this.GOOMBA = new Goomba(this, { spawnX: 350 }); // Create goomba
     MapCreator.loadObjects(this);
     MapCreator.addPhysics(this);
     MapCreator.createCamera(this);
