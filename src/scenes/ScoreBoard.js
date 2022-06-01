@@ -14,7 +14,7 @@ export default class ScoreBoard extends Phaser.Scene {
   }
 
   preload() {
-    this.background = new Background(this); // Load background
+    this.background = new Background(this);
   }
 
   create() {

@@ -10,7 +10,7 @@ import Goomba from "../../models/Goomba";
 ### Create Goomba
 ```js
 create() {
-    this.GOOMBA = new Goomba(this, {CONFIG})
+    this.goomba = new Goomba(this, {CONFIG})
     
     ... add platforms
 
@@ -21,6 +21,6 @@ create() {
 ### Call cursor handler on update
 ```js
 update() {
-    this.GOOMBA.cursorsHandler(this);
+    this.goomba.cursorsHandler(this);
 }
 ```

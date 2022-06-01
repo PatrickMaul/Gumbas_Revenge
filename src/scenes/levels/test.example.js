@@ -2,32 +2,24 @@ import MapCreator from "../../core/MapCreator";
 import Background from "../../core/Background";
 import Goomba from "../../models/Goomba";
 
-// TODO delete file after project finished:
-// /scenes/levels/test.js
-// config.js                    loadTestLevel
-// /scenes/Preload.js           loadTestLevel
-// /assets/test-tile.png
-// index.js                     TestLevel
-class TestLevel extends Phaser.Scene {
-  GOOMBA = null;
+export default class TestLevel extends Phaser.Scene {
+  goomba = null;
 
   preload() {
-    this.background = new Background(this); // Load background
-    MapCreator.preload(this, { MAP_KEY: "First_Test_Level_PM" });
+    this.background = new Background(this);
+    MapCreator.preload(this, { MAP_KEY: "Level_1_1_Map" }); // Loading level map
   }
   create() {
-    this.background.create(this);
-    MapCreator.loadLevel(this);
-    this.GOOMBA = new Goomba(this, { spawnX: 350 }); // Create goomba
-    MapCreator.loadObjects(this);
-    MapCreator.addPhysics(this);
-    MapCreator.createCamera(this);
+    this.background.create(this); // Add parallax background
+    MapCreator.loadLevel(this); // Loading level on screen
+    this.goomba = new Goomba(this, { spawnX: 350 }); // Add goomba
+    MapCreator.loadObjects(this); // Add Objects (Coins)
+    MapCreator.addPhysics(this); // Add physics (Colliders, etc.)
+    MapCreator.createCamera(this); // Add following cam (follows goomba)
   }
 
   update() {
-    this.GOOMBA.cursorsHandler(this); // Goomba coursor handler
-    MapCreator.update(this, { MAP_KEY: "TestLevel" });
+    this.goomba.cursorsHandler(this); // Add goomba coursor handler
+    MapCreator.update(this, { MAP_KEY: "TestLevel" }); // Add level update handler
   }
 }
-
-export default TestLevel;
