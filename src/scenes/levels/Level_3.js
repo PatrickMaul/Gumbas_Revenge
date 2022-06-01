@@ -7,7 +7,7 @@ class Level_3 extends Phaser.Scene {
 
   preload() {
     this.background = new Background(this); // Load background
-    MapCreator.preload(this, { MAP_KEY: "PM_02" });
+    MapCreator.preload(this, { MAP_KEY: "Level_3_Map" });
   }
 
   create() {
