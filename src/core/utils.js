@@ -1,4 +1,5 @@
 import Toad from '../models/Toad'
+import Mario from '../models/Toad'
 
 export function spawnEnemies(scene) {
     scene.enemies = scene.physics.add.group()
@@ -8,10 +9,13 @@ export function spawnEnemies(scene) {
     if(enemies) {
         enemies.objects.forEach(enemy => {
             const id = enemy.properties.filter(prop => prop.name === 'enemyId')[0].value
-
+            console.log(enemies)
             // for each enemy id spawn enemy
             if(id === 'TOAD') {
-                new Toad(scene, {SPAWN_X: enemy.x, SPAWN_Y:enemy.y})
+                new Mario(scene, {SPAWN_X: enemy.x, SPAWN_Y:enemy.y})
+            }
+            else if(id === 'MARIO') {
+                new Mario(scene, {SPAWN_X: enemy.x, SPAWN_Y:enemy.y})
             }
         })
     }
